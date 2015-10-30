@@ -1,7 +1,7 @@
 {
   "name": "ol3-tilecache",
   "version": "1.0.0",
-  "description": "OpenLayer 3 tile url function to load tile seeded with TileCache url schema",
+  "description": "OpenLayer 3 tile url function to load tile seeded with TileCache url scheme",
   "main": "src/ol3-tilecache.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

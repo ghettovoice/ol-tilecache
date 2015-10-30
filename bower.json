@@ -4,7 +4,7 @@
   "authors": [
     "Vladimir Vershinin (https://github.com/ghettovoice)"
   ],
-  "description": "OpenLayer 3 tile url function to load tile seeded with TileCache url schema",
+  "description": "OpenLayer 3 tile url function to load tile seeded with TileCache url scheme",
   "main": "src/ol3-tilecache.js",
   "moduleType": [
     "amd",

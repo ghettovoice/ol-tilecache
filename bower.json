@@ -1,0 +1,29 @@
+{
+  "name": "ol3-tilecache",
+  "version": "1.0.0",
+  "authors": [
+    "Vladimir Vershinin (https://github.com/ghettovoice)"
+  ],
+  "description": "OpenLayer 3 tile url function to load tile seeded with TileCache url schema",
+  "main": "src/ol3-tilecache.js",
+  "moduleType": [
+    "amd",
+    "es6",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "ol3",
+    "openlayers",
+    "tilecache"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/ghettovoice/ol3-tilecache",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

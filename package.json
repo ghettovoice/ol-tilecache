@@ -1,0 +1,31 @@
+{
+  "name": "ol3-tilecache",
+  "version": "1.0.0",
+  "description": "OpenLayer 3 tile url function to load tile seeded with TileCache url schema",
+  "main": "src/ol3-tilecache.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://github.com/ghettovoice/ol3-tilecache",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ghettovoice/ol3-tilecache.git"
+  },
+  "keywords": [
+    "ol3",
+    "openlayers",
+    "tilecache"
+  ],
+  "author": "Vladimir Vershinin (https://github.com/ghettovoice)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ghettovoice/ol3-tilecache/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-uglify": "~0.10.0",
+    "grunt-contrib-concat": "~0.5.1",
+    "grunt-umd-wrapper": "~0.4.0"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "ol3-tilecache",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "OpenLayer 3 tile url function to load tile seeded with TileCache url scheme",
   "main": "src/ol3-tilecache.js",
   "scripts": {

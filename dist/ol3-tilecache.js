@@ -1,13 +1,13 @@
 (function (root, factory) {
-    if (typeof define === 'function' && define.amd) {
-        // AMD. Register as an anonymous module.
-        define(['openlayers'], factory);
-    } else if (typeof exports === 'object') {
+    if (typeof exports === 'object') {
         // Node. Does not work with strict CommonJS, but
         // only CommonJS-like enviroments that support module.exports,
         // like Node.
         
         module.exports = factory(require('openlayers'));
+    } else if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['openlayers'], factory);
     } else {
         // Browser globals (root is window)
         root.ol.TileCacheUrlFunction = factory(root.ol);
@@ -19,12 +19,12 @@
  * Adds helper function for TileCache function creation.
  *
  * @author Vladimir Vershinin (https://github.com/ghettovoice)
- * @version 1.0.0
+ * @version 1.0.2
  * @license MIT https://opensource.org/licenses/MIT
  *          Based on OpenLayers 3. Copyright 2005-2015 OpenLayers Contributors. All rights reserved. http://openlayers.org
  * @copyright (c) 2015, Vladimir Vershinin https://github.com/ghettovoice
  */
-ol.TileCacheUrlFunction = (function() {
+var TileCacheUrlFunction = (function() {
     "use strict";
 
     /**
@@ -195,6 +195,6 @@ ol.TileCacheUrlFunction = (function() {
     return { createTileUrlFunction: createTileUrlFunction };
 }());
 
-return ol.TileCacheUrlFunction;
+return TileCacheUrlFunction;
 
 }));

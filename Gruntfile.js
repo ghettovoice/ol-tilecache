@@ -31,6 +31,9 @@ module.exports = function(grunt) {
             }
         },
         umd_wrapper: {
+            options: {
+                template: './src/umd-template'
+            },
             build: {
                 files: [{
                     src: '<%= paths.src %>/module',

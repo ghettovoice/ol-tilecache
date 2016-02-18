@@ -8,7 +8,7 @@
  *          Based on OpenLayers 3. Copyright 2005-2015 OpenLayers Contributors. All rights reserved. http://openlayers.org
  * @copyright (c) 2015, Vladimir Vershinin https://github.com/ghettovoice
  */
-ol.TileCacheUrlFunction = (function() {
+var TileCacheUrlFunction = (function() {
     "use strict";
 
     /**

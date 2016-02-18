@@ -15,7 +15,7 @@ or
     bower install ol3-tilecache
 ```    
 
-Available as AMD module or as global object `olTileCacheUrlFunction`. Requires `openlayers` as dependency.
+Available as AMD module or as global to `ol.TileCacheUrlFunction`. Requires `openlayers` as dependency.
 
 AMD
 ```js

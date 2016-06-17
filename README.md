@@ -32,16 +32,16 @@ In Browser environment it is available as `ol.TileCacheUrlFunction`.
 #### createTileUrlFunction
 **Arguments**
 
-* `url : string` _URL template_ 
-    Available URL placeholders:
-    ```
-    z | 0z - zoom level (simple number or padded with zero)
-    x1, x2, x3 - X axis index parts (remnants from dividing the integer part of the tile X index on 10^3, 10^6, 10^9)
-    y1, y2, y3 - Y axis index parts (remnants from dividing the integer part of the tile Y index on 10^3, 10^6, 10^9)
-    ```
+* `url : string` _URL template_
     
 **Returns**: `ol.TileUrlFunctionType`
 
+Available URL placeholders:
+```
+z | 0z - zoom level (simple number or padded with zero)
+x1, x2, x3 - X axis index parts (remnants from dividing the integer part of the tile X index on 10^3, 10^6, 10^9)
+y1, y2, y3 - Y axis index parts (remnants from dividing the integer part of the tile Y index on 10^3, 10^6, 10^9)
+```
     
 ### Example usage:
 

@@ -1,46 +1,55 @@
-# OpenLayer 3 tile url function to load tile seeded with [TileCache](http://tilecache.org/) URL scheme
+# TileCache url function for OpenLayers 3
 
-Adds custom `ol.TileUrlFunction` to use with [ol3](https://github.com/openlayers/ol3) map.
+Allows create custom [`ol.TileUrlFunctionType`](http://openlayers.org/en/latest/apidoc/ol.html#.TileUrlFunctionType) to load tiles seeded with [TileCache](http://tilecache.org/).
 
-## Installation and usage
-Install with
+## Installation
 
-```shell    
-    npm install ol3-tilecache
-```
-
-or
+Install it thought NPM:
 
 ```shell
-    bower install ol3-tilecache
-```    
-
-Available as AMD module or as global to `ol.TileCacheUrlFunction`. Requires `openlayers` as dependency.
-
-AMD
-```js
-define(['openlayers', 'ol3-tilecache'], function(ol, olTileCacheUrlFunction) {
-    var map = new ol.Map({
-        target: 'map',
-        view: new ol.View({
-            projection: 'EPSG:3857',
-            center: [4189972.14, 7507950.67],
-            zoom: 5
-        }),
-        layers: [
-            new ol.layer.Tile({
-                source: new ol.source.XYZ({
-                    tileUrlFunction: olTileCacheUrlFunction.createTileUrlFunction('//url/to/some/server/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png')
-                })
-            })
-        ]
-    });
-});
+npm install ol3-tilecache
 ```
 
-Global  
+Or download the latest version archive and add it with script tag:
+
+```html
+<script src="ol3-tilecache/dist/bundle.min.js"></script>
+```
+
+## Usage
+
+Plugin is packed into UMD wrapper, import it with CommonJS or ES6:
+
 ```js
-var map = new ol.Map({
+import TileCacheUrlFunction from 'ol3-tilecache';
+const TileCacheUrlFunction = require('ol3-tilecache');
+```
+
+In Browser environment it is available as `ol.TileCacheUrlFunction`.
+
+### Members
+
+#### createTileUrlFunction
+**Arguments**
+
+* `url : string` _URL template_ 
+    Available URL placeholders:
+    ```
+    z | 0z - zoom level (simple number or padded with zero)
+    x1, x2, x3 - X axis index parts (remnants from dividing the integer part of the tile X index on 10^3, 10^6, 10^9)
+    y1, y2, y3 - Y axis index parts (remnants from dividing the integer part of the tile Y index on 10^3, 10^6, 10^9)
+    ```
+    
+**Returns**: `ol.TileUrlFunctionType`
+
+    
+### Example usage:
+
+```js
+import ol from 'openlayers';
+import TileCacheUrlFunction from 'ol3-tilecache';
+
+const map = new ol.Map({
     target: 'map',
     view: new ol.View({
         projection: 'EPSG:3857',
@@ -50,20 +59,13 @@ var map = new ol.Map({
     layers: [
         new ol.layer.Tile({
             source: new ol.source.XYZ({
-                tileUrlFunction: ol.TileCacheUrlFunction.createTileUrlFunction('//url/to/some/server/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png')
+                tileUrlFunction: ol.TileCacheUrlFunction.createTileUrlFunction('http://tilecache_server/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png')
             })
         })
     ]
 });
 ```
 
-Created function accepts `0z, x1, x2, x3, y1, y2, y3` in additions to ol3 standard tokens, then can be used with other
-standard TMS URL scheme.
-```
-0z - padded with 0 zoom level
-x1, x2, x3 - X axis index parts (remnants from dividing the integer part of the tile X index on 1e3, 1e6, 1e9) 
-y1, y2, y3 - Y axis index parts (remnants from dividing the integer part of the tile Y index on 1e3, 1e6, 1e9)
-```
+## License
 
-
-
+MIT (c) 2016, Vladimir Vershinin

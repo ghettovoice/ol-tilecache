@@ -1,7 +1,0 @@
-@module TileCacheUrlFunction
-@export ol.TileCacheUrlFunction
-@import openlayers as ol
-
-@include ../src/tilecache.js
-
-return TileCacheUrlFunction;

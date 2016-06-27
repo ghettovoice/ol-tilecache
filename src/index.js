@@ -8,6 +8,8 @@
  */
 import createTileUrlFunction from './tilecache';
 
-export {
+const TileUrlFunction = {
     createTileUrlFunction
 };
+
+export default TileUrlFunction;

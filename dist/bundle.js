@@ -2,7 +2,7 @@
  * OpenLayer 3 tile url function to load tile seeded with TileCache url scheme
  * @package ol3-tilecache
  * @author Vladimir Vershinin (https://github.com/ghettovoice)
- * @version 1.1.1
+ * @version 1.1.2
  * @licence MIT https://opensource.org/licenses/MIT
  *          Based on OpenLayers 3. Copyright 2005-2016 OpenLayers Contributors. All rights reserved. http://openlayers.org
  * @copyright (c) 2016, Vladimir Vershinin (https://github.com/ghettovoice)
@@ -68,7 +68,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.createTileUrlFunction = undefined;
 
 	var _tilecache = __webpack_require__(1);
 
@@ -76,14 +75,20 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.createTileUrlFunction = _tilecache2.default; /**
-	                                                      * OpenLayer 3 tile url function to load tile seeded with TileCache url scheme.
-	                                                      *
-	                                                      * @author Vladimir Vershinin <ghettovoice@gmail.com>
-	                                                      * @licence MIT https://opensource.org/licenses/MIT
-	                                                      *          Based on OpenLayers 3. Copyright 2005-2016 OpenLayers Contributors. All rights reserved. http://openlayers.org
-	                                                      * @copyright (c) 2016, Vladimir Vershinin
-	                                                      */
+	var TileUrlFunction = {
+	  createTileUrlFunction: _tilecache2.default
+	}; /**
+	    * OpenLayer 3 tile url function to load tile seeded with TileCache url scheme.
+	    *
+	    * @author Vladimir Vershinin <ghettovoice@gmail.com>
+	    * @licence MIT https://opensource.org/licenses/MIT
+	    *          Based on OpenLayers 3. Copyright 2005-2016 OpenLayers Contributors. All rights reserved. http://openlayers.org
+	    * @copyright (c) 2016, Vladimir Vershinin
+	    */
+
+
+	exports.default = TileUrlFunction;
+	module.exports = exports['default'];
 
 /***/ },
 /* 1 */

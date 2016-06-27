@@ -2,18 +2,18 @@
  * OpenLayer 3 tile url function to load tile seeded with TileCache url scheme
  * @package ol3-tilecache
  * @author Vladimir Vershinin (https://github.com/ghettovoice)
- * @version 1.1.0
+ * @version 1.1.1
  * @licence MIT https://opensource.org/licenses/MIT
  *          Based on OpenLayers 3. Copyright 2005-2016 OpenLayers Contributors. All rights reserved. http://openlayers.org
  * @copyright (c) 2016, Vladimir Vershinin (https://github.com/ghettovoice)
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("ol"));
+		module.exports = factory(require("openlayers"));
 	else if(typeof define === 'function' && define.amd)
-		define(["ol"], factory);
+		define(["openlayers"], factory);
 	else if(typeof exports === 'object')
-		exports["TileCacheUrlFunction"] = factory(require("ol"));
+		exports["TileCacheUrlFunction"] = factory(require("openlayers"));
 	else
 		root["ol"] = root["ol"] || {}, root["ol"]["TileCacheUrlFunction"] = factory(root["ol"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_3__) {

@@ -1,3 +1,5 @@
+[![view on npm](http://img.shields.io/npm/v/ol3-tilecache.svg)](https://www.npmjs.org/package/ol3-tilecache)
+
 # TileCache url function for OpenLayers 3
 
 Allows create custom [`ol.TileUrlFunctionType`](http://openlayers.org/en/latest/apidoc/ol.html#.TileUrlFunctionType) to load tiles seeded with [TileCache](http://tilecache.org/).

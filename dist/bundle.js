@@ -16,7 +16,7 @@
 		exports["TileCacheUrlFunction"] = factory(require("openlayers"));
 	else
 		root["ol"] = root["ol"] || {}, root["ol"]["TileCacheUrlFunction"] = factory(root["ol"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_3__) {
+})(this, function(__WEBPACK_EXTERNAL_MODULE_4__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -69,7 +69,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _tileUrlFunction = __webpack_require__(1);
+	var _tileUrlFunction = __webpack_require__(2);
 
 	var tileUrlFunction = _interopRequireWildcard(_tileUrlFunction);
 
@@ -89,6 +89,87 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+	exports.calculateTileRangeForZ = calculateTileRangeForZ;
+	exports.getTileCoordForXYAndResolution = getTileCoordForXYAndResolution;
+	exports.getTileRangeHeight = getTileRangeHeight;
+	/**
+	 * @param {ol.tilegrid.TileGrid} tileGrid
+	 * @param {ol.Extent} extent
+	 * @param {number} z
+	 * @return {{minX, minY, maxX, maxY}}
+	 */
+	function calculateTileRangeForZ(tileGrid, extent, z) {
+	    var resolution = tileGrid.getResolution(z);
+
+	    var _getTileCoordForXYAnd = getTileCoordForXYAndResolution(tileGrid, extent[0], extent[1], resolution, false),
+	        _getTileCoordForXYAnd2 = _slicedToArray(_getTileCoordForXYAnd, 2),
+	        minX = _getTileCoordForXYAnd2[0],
+	        minY = _getTileCoordForXYAnd2[1];
+
+	    var _getTileCoordForXYAnd3 = getTileCoordForXYAndResolution(tileGrid, extent[2], extent[3], resolution, true),
+	        _getTileCoordForXYAnd4 = _slicedToArray(_getTileCoordForXYAnd3, 2),
+	        maxX = _getTileCoordForXYAnd4[0],
+	        maxY = _getTileCoordForXYAnd4[1];
+
+	    return { minX: minX, minY: minY, maxX: maxX, maxY: maxY };
+	}
+
+	/**
+	 * @param {ol.tilegrid.TileGrid} tileGrid
+	 * @param {number} x
+	 * @param {number} y
+	 * @param {number} resolution
+	 * @param {boolean} reverseIntersectionPolicy
+	 * @return {number[]}
+	 */
+	function getTileCoordForXYAndResolution(tileGrid, x, y, resolution, reverseIntersectionPolicy) {
+	    var z = tileGrid.getZForResolution(resolution);
+	    var scale = resolution / tileGrid.getResolution(z);
+	    var origin = tileGrid.getOrigin(z);
+	    var tileSize = tileGrid.getTileSize(z);
+
+	    if (!Array.isArray(tileSize)) {
+	        tileSize = [tileSize, tileSize];
+	    }
+
+	    var adjustX = reverseIntersectionPolicy ? 0.5 : 0;
+	    var adjustY = reverseIntersectionPolicy ? 0 : 0.5;
+	    var xFromOrigin = Math.floor((x - origin[0]) / resolution + adjustX);
+	    var yFromOrigin = Math.floor((y - origin[1]) / resolution + adjustY);
+	    var tileCoordX = scale * xFromOrigin / tileSize[0];
+	    var tileCoordY = scale * yFromOrigin / tileSize[1];
+
+	    if (reverseIntersectionPolicy) {
+	        tileCoordX = Math.ceil(tileCoordX) - 1;
+	        tileCoordY = Math.ceil(tileCoordY) - 1;
+	    } else {
+	        tileCoordX = Math.floor(tileCoordX);
+	        tileCoordY = Math.floor(tileCoordY);
+	    }
+
+	    return [tileCoordX, tileCoordY];
+	}
+
+	/**
+	 * @param {{minX, minY, maxX, maxY}} tileRange
+	 * @return {number}
+	 */
+	function getTileRangeHeight(tileRange) {
+	    return tileRange.maxY - tileRange.minY + 1;
+	}
+
+/***/ },
+/* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -100,31 +181,38 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.createTileUrlFunctionFromTemplate = createTileUrlFunctionFromTemplate;
 	exports.createTileUrlFunctionFromTemplates = createTileUrlFunctionFromTemplates;
 
-	var _openlayers = __webpack_require__(3);
+	var _openlayers = __webpack_require__(4);
 
 	var _openlayers2 = _interopRequireDefault(_openlayers);
 
-	var _util = __webpack_require__(2);
+	var _util = __webpack_require__(3);
+
+	var _tileRange = __webpack_require__(1);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var zRegEx = /\{z\}/g;
+
 	var zPadRegEx = /\{0z\}/g;
 	var xRegEx = /\{x\d?\}/g;
 	var yRegEx = /\{y\d?\}/g;
 	var dashYRegEx = /\{-y\d?\}/g;
+
+	var EPSG3857_EXTENT = [-20037508.342789244, -20037508.342789244, 20037508.342789244, 20037508.342789244];
 
 	/**
 	 * Basic create factory.
 	 *
 	 * @param {string} url Url template
 	 * @param {ol.tilegrid.TileGrid} [tileGrid] Tile grid.
+	 * @param {ol.Extent | number[]} [extent] Tile grid extent.
 	 * @returns {ol.TileUrlFunctionType}
 	 * @static
 	 * @public
 	 */
 	function createTileUrlFunction(url) {
 	    var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _openlayers2.default.tilegrid.createXYZ();
+	    var extent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EPSG3857_EXTENT;
 
 	    return createTileUrlFunctionFromTemplates(expandUrl(url), tileGrid);
 	}
@@ -134,13 +222,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @param {string} template Source url
 	 * @param {ol.tilegrid.TileGrid} [tileGrid] Tile grid.
+	 * @param {ol.Extent | number[]} [extent] Tile grid extent.
 	 * @returns {ol.TileUrlFunctionType}
 	 * @private
 	 */
 	function createTileUrlFunctionFromTemplate(template) {
 	    var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _openlayers2.default.tilegrid.createXYZ();
+	    var extent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EPSG3857_EXTENT;
 
-	    return(
+	    return (
 	        /**
 	         * @param {ol.TileCoord} tileCoord Tile Coordinate.
 	         * @return {string | undefined} Tile URL.
@@ -153,11 +243,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    return coordReplacer(y)(part);
 	                }).replace(dashYRegEx, function (part) {
 	                    var z = tileCoord[0];
-	                    var range = tileGrid.getFullTileRange(z);
 	                    // The {-y} placeholder requires a tile grid with extent
-	                    (0, _util.assert)(range, 'Tile grid with defined extent');
-
-	                    var y = range.getHeight() + tileCoord[2];
+	                    var range = (0, _tileRange.calculateTileRangeForZ)(tileGrid, extent, z);
+	                    var y = (0, _tileRange.getTileRangeHeight)(range) + tileCoord[2];
 
 	                    return coordReplacer(y)(part);
 	                });
@@ -171,11 +259,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @param {string[]} templates Url templates
 	 * @param {ol.tilegrid.TileGrid} [tileGrid] Tile grid.
+	 * @param {ol.Extent | number[]} [extent] Tile grid extent.
 	 * @returns {ol.TileUrlFunctionType}
 	 * @private
 	 */
 	function createTileUrlFunctionFromTemplates(templates) {
 	    var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _openlayers2.default.tilegrid.createXYZ();
+	    var extent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EPSG3857_EXTENT;
 
 	    return createTileUrlFunctionFromTileUrlFunctions(templates.map(function (tileUrlFunction) {
 	        return createTileUrlFunctionFromTemplate(tileUrlFunction, tileGrid);
@@ -244,7 +334,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return tileUrlFunctions[0];
 	    }
 
-	    return(
+	    return (
 	        /**
 	         * @param {ol.TileCoord} tileCoord Tile Coordinate.
 	         * @param {number} pixelRatio Pixel ratio.
@@ -263,7 +353,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -321,10 +411,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports) {
 
-	module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
+	module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
 /***/ }
 /******/ ])

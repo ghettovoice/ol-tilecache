@@ -7,7 +7,7 @@
     "release": "webpack --release --verbose",
     "build": "webpack --build --verbose",
     "serv": "webpack-dev-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha 'tests/**/*.js'"
   },
   "homepage": "https://github.com/ghettovoice/ol3-tilecache",
   "repository": {
@@ -29,19 +29,29 @@
     "openlayers": ">= 3.14"
   },
   "devDependencies": {
-    "babel-loader": "^6.2.4",
+    "babel-loader": "^6.2.7",
     "babel-plugin-add-module-exports": "^0.2.1",
-    "babel-plugin-transform-flow-strip-types": "^6.8.0",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-stage-0": "^6.5.0",
+    "babel-plugin-transform-flow-strip-types": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "chai": "^3.5.0",
     "chalk": "^1.1.3",
-    "glob": "^7.0.3",
-    "lodash": "^4.13.1",
-    "openlayers": "^3.17.1",
-    "progress-bar-webpack-plugin": "^1.8.0",
-    "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
+    "glob": "^7.1.1",
+    "istanbul": "^0.4.5",
+    "lodash": "^4.16.4",
+    "mocha": "^3.1.2",
+    "openlayers": "^3.19.1",
+    "progress-bar-webpack-plugin": "^1.9.0",
+    "webpack": "^1.13.3",
+    "webpack-dev-server": "^1.16.2"
   },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist",
+    "src",
+    "index.html"
+  ],
   "babel": {
     "presets": [
       "es2015",

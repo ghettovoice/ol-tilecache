@@ -69,37 +69,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _tilecache = __webpack_require__(1);
+	var _tileUrlFunction = __webpack_require__(1);
 
-	var _tilecache2 = _interopRequireDefault(_tilecache);
+	var tileUrlFunction = _interopRequireWildcard(_tileUrlFunction);
 
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
-	var TileUrlFunction = {
-	  createTileUrlFunction: _tilecache2.default
-	}; /**
-	    * OpenLayer 3 tile url function to load tile seeded with TileCache url scheme.
-	    *
-	    * @author Vladimir Vershinin <ghettovoice@gmail.com>
-	    * @licence MIT https://opensource.org/licenses/MIT
-	    *          Based on OpenLayers 3. Copyright 2005-2016 OpenLayers Contributors. All rights reserved. http://openlayers.org
-	    * @copyright (c) 2016, Vladimir Vershinin
-	    */
+	exports.default = tileUrlFunction; /**
+	                                    * OpenLayer 3 tile url function to load tile seeded with TileCache url scheme.
+	                                    *
+	                                    * @package ol3-tilecache
+	                                    * @author Vladimir Vershinin <ghettovoice@gmail.com>
+	                                    * @licence MIT https://opensource.org/licenses/MIT
+	                                    *          Based on OpenLayers 3. Copyright 2005-2016 OpenLayers Contributors. All rights reserved. http://openlayers.org
+	                                    * @copyright (c) 2016, Vladimir Vershinin
+	                                    */
 
-
-	exports.default = TileUrlFunction;
 	module.exports = exports['default'];
 
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.default = createTileUrlFunction;
+	exports.createTileUrlFunction = createTileUrlFunction;
+	exports.createTileUrlFunctionFromTemplate = createTileUrlFunctionFromTemplate;
+	exports.createTileUrlFunctionFromTemplates = createTileUrlFunctionFromTemplates;
 
 	var _openlayers = __webpack_require__(3);
 
@@ -116,15 +115,71 @@ return /******/ (function(modules) { // webpackBootstrap
 	var dashYRegEx = /\{-y\d?\}/g;
 
 	/**
-	 * Create helper function.
+	 * Basic create factory.
 	 *
 	 * @param {string} url Url template
+	 * @param {ol.tilegrid.TileGrid} [tileGrid] Tile grid.
 	 * @returns {ol.TileUrlFunctionType}
 	 * @static
 	 * @public
 	 */
 	function createTileUrlFunction(url) {
-	    return createTileUrlFunctionFromTemplates(expandUrl(url));
+	    var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _openlayers2.default.tilegrid.createXYZ();
+
+	    return createTileUrlFunctionFromTemplates(expandUrl(url), tileGrid);
+	}
+
+	/**
+	 * Creates tile URL function from single template.
+	 *
+	 * @param {string} template Source url
+	 * @param {ol.tilegrid.TileGrid} [tileGrid] Tile grid.
+	 * @returns {ol.TileUrlFunctionType}
+	 * @private
+	 */
+	function createTileUrlFunctionFromTemplate(template) {
+	    var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _openlayers2.default.tilegrid.createXYZ();
+
+	    return(
+	        /**
+	         * @param {ol.TileCoord} tileCoord Tile Coordinate.
+	         * @return {string | undefined} Tile URL.
+	         */
+	        function (tileCoord) {
+	            if (tileCoord != null) {
+	                return template.replace(zRegEx, zoomReplacer(tileCoord[0])).replace(zPadRegEx, zoomReplacer(tileCoord[0], true)).replace(xRegEx, coordReplacer(tileCoord[1])).replace(yRegEx, function (part) {
+	                    var y = -tileCoord[2] - 1;
+
+	                    return coordReplacer(y)(part);
+	                }).replace(dashYRegEx, function (part) {
+	                    var z = tileCoord[0];
+	                    var range = tileGrid.getFullTileRange(z);
+	                    // The {-y} placeholder requires a tile grid with extent
+	                    (0, _util.assert)(range, 'Tile grid with defined extent');
+
+	                    var y = range.getHeight() + tileCoord[2];
+
+	                    return coordReplacer(y)(part);
+	                });
+	            }
+	        }
+	    );
+	}
+
+	/**
+	 * Creates tile URL function from multiple templates.
+	 *
+	 * @param {string[]} templates Url templates
+	 * @param {ol.tilegrid.TileGrid} [tileGrid] Tile grid.
+	 * @returns {ol.TileUrlFunctionType}
+	 * @private
+	 */
+	function createTileUrlFunctionFromTemplates(templates) {
+	    var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _openlayers2.default.tilegrid.createXYZ();
+
+	    return createTileUrlFunctionFromTileUrlFunctions(templates.map(function (tileUrlFunction) {
+	        return createTileUrlFunctionFromTemplate(tileUrlFunction, tileGrid);
+	    }));
 	}
 
 	/**
@@ -157,33 +212,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	/**
-	 * @param {string} template Source url
-	 * @returns {ol.TileUrlFunctionType}
-	 * @private
-	 */
-	function createTileUrlFunctionFromTemplate(template) {
-	    return(
-	        /**
-	         * @param {ol.TileCoord} tileCoord Tile Coordinate.
-	         * @return {string | undefined} Tile URL.
-	         */
-	        function (tileCoord) {
-	            if (tileCoord != null) {
-	                return template.replace(zRegEx, zoomReplacer(tileCoord[0])).replace(zPadRegEx, zoomReplacer(tileCoord[0], true)).replace(xRegEx, coordReplacer(tileCoord[1])).replace(yRegEx, function (part) {
-	                    var y = -tileCoord[2] - 1;
-
-	                    return coordReplacer(y)(part);
-	                }).replace(dashYRegEx, function (part) {
-	                    var y = (1 << tileCoord[0]) + tileCoord[2];
-
-	                    return coordReplacer(y)(part);
-	                });
-	            }
-	        }
-	    );
-	}
-
-	/**
 	 * @param {string} url
 	 * @returns {Array.<string>}
 	 * @private
@@ -204,15 +232,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    return urls;
-	}
-
-	/**
-	 * @param {string[]} templates Url templates
-	 * @returns {ol.TileUrlFunctionType}
-	 * @private
-	 */
-	function createTileUrlFunctionFromTemplates(templates) {
-	    return createTileUrlFunctionFromTileUrlFunctions(templates.map(createTileUrlFunctionFromTemplate));
 	}
 
 	/**
@@ -242,7 +261,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    );
 	}
-	module.exports = exports["default"];
 
 /***/ },
 /* 2 */
@@ -251,10 +269,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	"use strict";
 
 	Object.defineProperty(exports, "__esModule", {
-	  value: true
+	    value: true
 	});
 	exports.zeroPad = zeroPad;
 	exports.modulo = modulo;
+	exports.assert = assert;
 	/**
 	 * Left zero pad.
 	 *
@@ -263,9 +282,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @returns {string}
 	 */
 	function zeroPad(num, places) {
-	  var zero = places - num.toString().length + 1;
+	    var zero = places - num.toString().length + 1;
 
-	  return (new Array(parseInt(zero > 0 && zero, 10)).join("0") + num).toString().slice(-places);
+	    return (new Array(parseInt(zero > 0 && zero, 10)).join("0") + num).toString().slice(-places);
 	}
 
 	/**
@@ -283,9 +302,22 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * @link https://closure-library.googlecode.com/git-history/docs/local_closure_goog_math_math.js.source.html#line73
 	 */
 	function modulo(a, b) {
-	  var m = a % b;
+	    var m = a % b;
 
-	  return m * b < 0 ? m + b : m;
+	    return m * b < 0 ? m + b : m;
+	}
+
+	/**
+	 * @param {*} value
+	 * @param {string} [message]
+	 * @throws {Error} Throws on false value
+	 */
+	function assert(value) {
+	    var message = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'Assertion failed';
+
+	    if (!value) {
+	        throw new Error(message);
+	    }
 	}
 
 /***/ },

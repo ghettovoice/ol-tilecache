@@ -29,11 +29,8 @@
             }),
             layers: [
                 new ol.layer.Tile({
-                    source: new ol.source.OSM(),
-                }),
-                new ol.layer.Tile({
                     source: new ol.source.XYZ({
-                        tileUrlFunction: ol.TileCacheUrlFunction.createTileUrlFunction('http://karta.tatar.ru/tilecache/satellite/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png')
+                        tileUrlFunction: ol.TileCacheUrlFunction.createTileUrlFunction('http://{a-z}.tiles.org/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png')
                     })
                 })
             ]

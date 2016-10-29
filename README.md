@@ -36,14 +36,16 @@ In Browser environment it is available as `ol.TileCacheUrlFunction`.
 **Arguments**
 
 * `url : string` _URL template_
+* `tileGrid : ol.tilegrid.TileGrid` _Custom tile grid. Default is EPSG:3857 x/y/z grid_
+* `extent : ol.Extent` _Tile grid extent. Default is EPSG:3857 extent_
     
 **Returns**: `ol.TileUrlFunctionType`
 
 Available URL placeholders:
 ```
 z | 0z - zoom level (simple number or padded with zero)
-x1, x2, x3 - X axis index parts (remnants from dividing the integer part of the tile X index on 10^3, 10^6, 10^9)
-y1, y2, y3 - Y axis index parts (remnants from dividing the integer part of the tile Y index on 10^3, 10^6, 10^9)
+x1, x2, x3 - X axis index parts (remnant from dividing the tile X index on 10^9 broken down by 3 digits)
+y1, y2, y3 - Y axis index parts (remnant from dividing the tile Y index on 10^9 broken down by 3 digits)
 ```
     
 ### Example usage:

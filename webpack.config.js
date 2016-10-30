@@ -69,7 +69,7 @@ if (DEBUG) {
 }
 
 module.exports = {
-    devtool: DEBUG ? 'cheap-module-eval-source-map' : false,
+    devtool: DEBUG ? '#cheap-module-eval-source-map' : '#source-map',
     devServer: {
         contentBase: __dirname,
         hot: true,

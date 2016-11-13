@@ -7,10 +7,11 @@ Allows create custom [`ol.TileUrlFunctionType`](http://openlayers.org/en/latest/
 
 ## Installation
 
-Install it thought NPM:
+Install it thought NPM or Bower:
 
 ```shell
 npm install ol3-tilecache
+bower install ol3-tilecache
 ```
 
 Or download the latest version archive and add it with script tag:

@@ -27,7 +27,7 @@ const EPSG3857_EXTENT = [
  * @public
  */
 export function createTileUrlFunction(url, tileGrid = ol.tilegrid.createXYZ(), extent = EPSG3857_EXTENT) {
-    return createTileUrlFunctionFromTemplates(expandUrl(url), tileGrid);
+    return createTileUrlFunctionFromTemplates(expandUrl(url), tileGrid, extent);
 }
 
 /**
@@ -78,7 +78,7 @@ export function createTileUrlFunctionFromTemplate(template, tileGrid = ol.tilegr
  */
 export function createTileUrlFunctionFromTemplates(templates, tileGrid = ol.tilegrid.createXYZ(), extent = EPSG3857_EXTENT) {
     return createTileUrlFunctionFromTileUrlFunctions(
-        templates.map(tileUrlFunction => createTileUrlFunctionFromTemplate(tileUrlFunction, tileGrid))
+        templates.map(tileUrlFunction => createTileUrlFunctionFromTemplate(tileUrlFunction, tileGrid, extent))
     );
 }
 

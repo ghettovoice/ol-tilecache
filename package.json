@@ -1,12 +1,13 @@
 {
   "name": "ol3-tilecache",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "OpenLayer 3 tile url function to load tile seeded with TileCache url scheme",
   "main": "dist/bundle.js",
   "scripts": {
     "release": "webpack --release --verbose",
     "build": "webpack --build --verbose",
     "serv": "webpack-dev-server",
+    "start": "npm run serv",
     "test": "mocha-phantomjs tests/test.html"
   },
   "homepage": "https://github.com/ghettovoice/ol3-tilecache",
@@ -26,7 +27,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "openlayers": ">= 3.14"
+    "openlayers": ">=3.14"
   },
   "devDependencies": {
     "babel-core": "^6.18.0",

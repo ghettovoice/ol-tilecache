@@ -2,7 +2,7 @@
  * OpenLayer 3 tile url function to load tile seeded with TileCache url scheme
  * @package ol3-tilecache
  * @author Vladimir Vershinin (https://github.com/ghettovoice)
- * @version 1.2.1
+ * @version 1.2.2
  * @licence MIT https://opensource.org/licenses/MIT
  *          Based on OpenLayers 3. Copyright 2005-2016 OpenLayers Contributors. All rights reserved. http://openlayers.org
  * @copyright (c) 2016, Vladimir Vershinin (https://github.com/ghettovoice)
@@ -214,7 +214,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _openlayers2.default.tilegrid.createXYZ();
 	    var extent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EPSG3857_EXTENT;
 	
-	    return createTileUrlFunctionFromTemplates(expandUrl(url), tileGrid);
+	    return createTileUrlFunctionFromTemplates(expandUrl(url), tileGrid, extent);
 	}
 	
 	/**
@@ -268,7 +268,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var extent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EPSG3857_EXTENT;
 	
 	    return createTileUrlFunctionFromTileUrlFunctions(templates.map(function (tileUrlFunction) {
-	        return createTileUrlFunctionFromTemplate(tileUrlFunction, tileGrid);
+	        return createTileUrlFunctionFromTemplate(tileUrlFunction, tileGrid, extent);
 	    }));
 	}
 	

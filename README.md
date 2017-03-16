@@ -1,7 +1,8 @@
-[![Build Status](https://travis-ci.org/ghettovoice/ol3-tilecache.svg?branch=master)](https://travis-ci.org/ghettovoice/ol3-tilecache)
-[![view on npm](http://img.shields.io/npm/v/ol3-tilecache.svg)](https://www.npmjs.org/package/ol3-tilecache)
+[![Build Status](https://travis-ci.org/ghettovoice/ol-tilecache.svg?branch=master)](https://travis-ci.org/ghettovoice/ol-tilecache)
+[![view on npm](http://img.shields.io/npm/v/ol-tilecache.svg)](https://www.npmjs.org/package/ol-tilecache)
+[![License](https://img.shields.io/github/license/ghettovoice/ol-tilecache.svg)](https://github.com/ghettovoice/ol-tilecache/blob/master/LICENSE)
 
-# TileCache url function for OpenLayers 3
+# TileCache url function for OpenLayers
 
 Allows create custom [`ol.TileUrlFunctionType`](http://openlayers.org/en/latest/apidoc/ol.html#.TileUrlFunctionType) to load tiles seeded with [TileCache](http://tilecache.org/).
 
@@ -10,14 +11,14 @@ Allows create custom [`ol.TileUrlFunctionType`](http://openlayers.org/en/latest/
 Install it thought NPM or Bower:
 
 ```shell
-npm install openlayers ol3-tilecache
-bower install ol3-tilecache
+npm install openlayers ol-tilecache
+bower install ol-tilecache
 ```
 
 Or download the latest version archive and add it with script tag:
 
 ```html
-<script src="ol3-tilecache/dist/bundle.min.js"></script>
+<script src="ol-tilecache/dist/bundle.min.js"></script>
 ```
 
 ## Usage
@@ -25,8 +26,8 @@ Or download the latest version archive and add it with script tag:
 Plugin is packed into UMD wrapper, import it with CommonJS or ES6:
 
 ```js
-import TileCacheUrlFunction from 'ol3-tilecache';
-const TileCacheUrlFunction = require('ol3-tilecache');
+import TileCacheUrlFunction from 'ol-tilecache';
+const TileCacheUrlFunction = require('ol-tilecache');
 ```
 
 In Browser environment it is available as `ol.TileCacheUrlFunction`.
@@ -53,7 +54,7 @@ y1, y2, y3 - Y axis index parts (remnant from dividing the tile Y index on 10^9 
 
 ```js
 import ol from 'openlayers';
-import TileCacheUrlFunction from 'ol3-tilecache';
+import TileCacheUrlFunction from 'ol-tilecache';
 
 const map = new ol.Map({
     target: 'map',
@@ -74,4 +75,4 @@ const map = new ol.Map({
 
 ## License
 
-MIT (c) 2016, Vladimir Vershinin
+MIT (c) 2016-2017, Vladimir Vershinin

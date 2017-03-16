@@ -1,7 +1,7 @@
 /**
  * Unit tests
  *
- * @package ol3-tilecache
+ * @package ol-tilecache
  * @author Vladimir Vershinin <ghettovoice@gmail.com>
  */
 var assert = chai.assert;
@@ -14,7 +14,7 @@ var tiles = [
     [ [ 10, 10907, -826 ], 'http://b.tileserver.org/10/000/010/907/000/000/825.png', 'http://b.tileserver.org/10/000/010/907/000/000/198.png' ],
 ];
 
-suite('ol3-tilecache tests', function () {
+suite('ol-tilecache tests', function () {
     test('Test URL template ' + urlTemplate, function () {
         var tileUrlFunction = ol.TileCacheUrlFunction.createTileUrlFunction(urlTemplate);
         var tileUrl;

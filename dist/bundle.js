@@ -1,11 +1,10 @@
 /*!
- * OpenLayer 3 tile url function to load tile seeded with TileCache url scheme
- * @package ol3-tilecache
- * @author Vladimir Vershinin (https://github.com/ghettovoice)
- * @version 1.2.2
+ * OpenLayers tile url function to load tile seeded with TileCache url scheme
+ * @package ol-tilecache
+ * @author Vladimir Vershinin <ghettovoice@gmail.com>
+ * @version 1.2.4
  * @licence MIT https://opensource.org/licenses/MIT
- *          Based on OpenLayers 3. Copyright 2005-2016 OpenLayers Contributors. All rights reserved. http://openlayers.org
- * @copyright (c) 2016, Vladimir Vershinin (https://github.com/ghettovoice)
+ * @copyright (c) 2016-2017, Vladimir Vershinin <ghettovoice@gmail.com>
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -76,13 +75,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	exports.default = tileUrlFunction; /**
-	                                    * OpenLayer 3 tile url function to load tile seeded with TileCache url scheme.
+	                                    * OpenLayers tile url function to load tile seeded with TileCache url scheme.
 	                                    *
-	                                    * @package ol3-tilecache
+	                                    * @package ol-tilecache
 	                                    * @author Vladimir Vershinin <ghettovoice@gmail.com>
 	                                    * @licence MIT https://opensource.org/licenses/MIT
-	                                    *          Based on OpenLayers 3. Copyright 2005-2016 OpenLayers Contributors. All rights reserved. http://openlayers.org
-	                                    * @copyright (c) 2016, Vladimir Vershinin
+	                                    * @copyright (c) 2016-2017, Vladimir Vershinin
 	                                    */
 
 	module.exports = exports['default'];

@@ -1,7 +1,7 @@
 {
-  "name": "ol3-tilecache",
-  "version": "1.2.3",
-  "description": "OpenLayer 3 tile url function to load tile seeded with TileCache url scheme",
+  "name": "ol-tilecache",
+  "version": "1.2.4",
+  "description": "OpenLayers tile url function to load tile seeded with TileCache url scheme",
   "main": "dist/bundle.js",
   "scripts": {
     "release": "webpack --release --verbose",
@@ -10,20 +10,20 @@
     "start": "npm run serv",
     "test": "mocha-phantomjs tests/test.html"
   },
-  "homepage": "https://github.com/ghettovoice/ol3-tilecache",
+  "homepage": "https://github.com/ghettovoice/ol-tilecache",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ghettovoice/ol3-tilecache.git"
+    "url": "https://github.com/ghettovoice/ol-tilecache.git"
   },
   "keywords": [
-    "ol3",
+    "ol",
     "openlayers",
     "tilecache"
   ],
-  "author": "Vladimir Vershinin (https://github.com/ghettovoice)",
+  "author": "Vladimir Vershinin <ghettovoice@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ghettovoice/ol3-tilecache/issues"
+    "url": "https://github.com/ghettovoice/ol-tilecache/issues"
   },
   "dependencies": {},
   "peerDependencies": {
@@ -43,7 +43,7 @@
     "lodash": "^4.16.4",
     "mocha": "^3.1.2",
     "mocha-phantomjs": "^4.1.0",
-    "openlayers": "^3.19.1",
+    "openlayers": "^4.0.1",
     "progress-bar-webpack-plugin": "^1.9.0",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"

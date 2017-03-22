@@ -18,7 +18,7 @@ module.exports = (env = {}) => {
   const srcDir = path.join(__dirname, 'src')
   const outDir = path.join(__dirname, 'dist')
   const bundleName = RELEASE ? 'bundle.min.js' : 'bundle.js'
-  const exportName = [ 'ol', 'tileCacheFn' ]
+  const exportName = [ 'ol', 'tileCacheUrlFn' ]
   const entry = [ path.join(srcDir, 'index.js') ]
 
   const banner =

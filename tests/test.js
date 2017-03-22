@@ -16,7 +16,7 @@ var tiles = [
 
 suite('ol-tilecache tests', function () {
   test('Test URL template ' + urlTemplate, function () {
-    var tileUrlFunction = ol.tileCacheFn.createTileUrlFunction(urlTemplate)
+    var tileUrlFunction = ol.tileCacheUrlFn.createTileUrlFunction(urlTemplate)
     var tileUrl
 
     assert.typeOf(tileUrlFunction, 'function')
@@ -28,7 +28,7 @@ suite('ol-tilecache tests', function () {
   })
 
   test('Test URL template ' + flipUrlTemplate, function () {
-    var tileUrlFunction = ol.tileCacheFn.createTileUrlFunction(flipUrlTemplate)
+    var tileUrlFunction = ol.tileCacheUrlFns.createTileUrlFunction(flipUrlTemplate)
     var tileUrl
 
     tiles.map(function (arr) {

@@ -12,9 +12,9 @@
 	else if(typeof define === 'function' && define.amd)
 		define(["ol/tilegrid"], factory);
 	else if(typeof exports === 'object')
-		exports["tileCacheFn"] = factory(require("ol/tilegrid"));
+		exports["tileCacheUrlFn"] = factory(require("ol/tilegrid"));
 	else
-		root["ol"] = root["ol"] || {}, root["ol"]["tileCacheFn"] = factory(root["ol"]["tilegrid"]);
+		root["ol"] = root["ol"] || {}, root["ol"]["tileCacheUrlFn"] = factory(root["ol"]["tilegrid"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_4__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache

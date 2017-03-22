@@ -18,7 +18,7 @@ module.exports = (env = {}) => {
   const srcDir = path.join(__dirname, 'src')
   const outDir = path.join(__dirname, 'dist')
   const bundleName = RELEASE ? 'bundle.min.js' : 'bundle.js'
-  const exportName = [ 'ol', 'tileCacheFn' ]
+  const exportName = [ 'ol', 'tileCacheUrlFn' ]
   const entry = [ path.join(srcDir, 'index.js') ]
 
   const banner =
@@ -83,16 +83,16 @@ module.exports = (env = {}) => {
     cache: DEBUG,
     profile: PROFILE,
     entry,
-    externals: [
-      {
-        'ol/tilegrid': {
-          root: ['ol','tilegrid'],
-          amd: 'ol/tilegrid',
-          commonjs: 'ol/tilegrid',
-          commonjs2: 'ol/tilegrid'
-        }
-      }
-    ],
+    // externals: [
+    //   {
+    //     'ol/tilegrid': {
+    //       root: ['ol','tilegrid'],
+    //       amd: 'ol/tilegrid',
+    //       commonjs: 'ol/tilegrid',
+    //       commonjs2: 'ol/tilegrid'
+    //     }
+    //   }
+    // ],
     output: {
       path: outDir,
       filename: bundleName,

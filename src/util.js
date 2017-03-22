@@ -5,12 +5,12 @@
  * @param {number} places
  * @returns {string}
  */
-export function zeroPad(num, places) {
-    const zero = places - num.toString().length + 1;
+export function zeroPad (num, places) {
+  const zero = places - num.toString().length + 1
 
-    return (new Array(parseInt(zero > 0 && zero, 10)).join("0") + num)
-        .toString()
-        .slice(-places);
+  return (new Array(parseInt(zero > 0 && zero, 10)).join("0") + num)
+    .toString()
+    .slice(-places)
 }
 
 /**
@@ -27,10 +27,10 @@ export function zeroPad(num, places) {
  *     or b < x <= 0, depending on the sign of b).
  * @link https://closure-library.googlecode.com/git-history/docs/local_closure_goog_math_math.js.source.html#line73
  */
-export function modulo(a, b) {
-    const m = a % b;
+export function modulo (a, b) {
+  const m = a % b
 
-    return (m * b) < 0 ? m + b : m;
+  return (m * b) < 0 ? m + b : m
 }
 
 /**
@@ -38,8 +38,12 @@ export function modulo(a, b) {
  * @param {string} [message]
  * @throws {Error} Throws on false value
  */
-export function assert(value, message = 'Assertion failed') {
-    if (!value) {
-        throw new Error(message);
-    }
+export function assert (value, message = 'Assertion failed') {
+  if (!value) {
+    throw new Error(message)
+  }
+}
+
+export function isArray (value) {
+  return Object.prototype.toString.call(value) === '[object Array]'
 }

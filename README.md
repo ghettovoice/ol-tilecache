@@ -1,17 +1,26 @@
 [![Build Status](https://travis-ci.org/ghettovoice/ol-tilecache.svg?branch=master)](https://travis-ci.org/ghettovoice/ol-tilecache)
+[![GitHub tag](https://img.shields.io/github/tag/ghettovoice/ol-tilecache.svg)](https://github.com/ghettovoice/ol-tilecache/releases)
 [![view on npm](http://img.shields.io/npm/v/ol-tilecache.svg)](https://www.npmjs.org/package/ol-tilecache)
 [![License](https://img.shields.io/github/license/ghettovoice/ol-tilecache.svg)](https://github.com/ghettovoice/ol-tilecache/blob/master/LICENSE)
 
 # TileCache url function for OpenLayers
 
-Allows create custom [`ol.TileUrlFunctionType`](http://openlayers.org/en/latest/apidoc/ol.html#.TileUrlFunctionType) to load tiles seeded with [TileCache](http://tilecache.org/).
+Allows create custom [`ol.TileUrlFunctionType`](http://openlayers.org/en/latest/apidoc/ol.html#.TileUrlFunctionType) to load tiles 
+seeded with [TileCache](http://tilecache.org/).
+
+### NOTE   
+**Current version `2.x` is aimed to work with ES2015 build of OpenLayers (NPM [ol](https://www.npmjs.com/package/ol)) and 
+bundlers like [Webpack](https://webpack.js.org/). For basic setup through `script` tag you also need to install standard version 
+of OpenLayers (NPM [openlayers](https://www.npmjs.com/package/openlayers))**
+
+Version `1.x` available at branch `master-1.x` (install with `npm install ol-tilecache@1`)
 
 ## Installation
 
 Install it thought NPM or Bower:
 
 ```shell
-npm install openlayers ol-tilecache
+npm install ol ol-tilecache
 bower install ol-tilecache
 ```
 
@@ -20,17 +29,28 @@ Or download the latest version archive and add it with script tag:
 ```html
 <script src="ol-tilecache/dist/bundle.min.js"></script>
 ```
+**NOTE: You also need standard build of OpenLayers (NPM [openlayers](https://www.npmjs.com/package/openlayers)) for 
+such type of installation**
 
 ## Usage
 
 Plugin is packed into UMD wrapper, import it with CommonJS or ES6:
 
 ```js
-import TileCacheUrlFunction from 'ol-tilecache';
-const TileCacheUrlFunction = require('ol-tilecache');
+import * as tileCacheFn from 'ol-tilecache'
+const tileCacheFn = require('ol-tilecache')
 ```
 
-In Browser environment it is available as `ol.TileCacheUrlFunction`.
+In Browser environment it is available as `ol.tileCacheFn`.
+```html
+<!-- include OpenLayers dist build -->
+<script src="/js/openlayers/dist/ol.js"></script>
+<script src="/js/ol-tilecache/dist/bundle.min.js"></script>
+<script>
+  // all functions inside ol.tileCacheFn namespace
+  const tileUrlFunc = ol.tileCacheFn.createTileUrlFunction('http://tilecache_server/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png') 
+</script>
+```
 
 ### Members
 
@@ -53,24 +73,27 @@ y1, y2, y3 - Y axis index parts (remnant from dividing the tile Y index on 10^9 
 ### Example usage:
 
 ```js
-import ol from 'openlayers';
-import TileCacheUrlFunction from 'ol-tilecache';
+import Map from 'ol/map'
+import View from 'ol/view'
+import TileLayer from 'ol/layer/tile'
+import XyzSource from 'ol/source/xyz'
+import { createTileUrlFunction } from 'ol-tilecache'
 
-const map = new ol.Map({
+const map = new Map({
     target: 'map',
-    view: new ol.View({
+    view: new View({
         projection: 'EPSG:3857',
         center: [4189972.14, 7507950.67],
         zoom: 5
     }),
     layers: [
-        new ol.layer.Tile({
-            source: new ol.source.XYZ({
-                tileUrlFunction: ol.TileCacheUrlFunction.createTileUrlFunction('http://tilecache_server/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png')
+        new TileLayer({
+            source: new XyzSource({
+                tileUrlFunction: createTileUrlFunction('http://tilecache_server/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png')
             })
         })
     ]
-});
+})
 ```
 
 ## License

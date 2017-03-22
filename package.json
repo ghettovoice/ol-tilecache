@@ -1,6 +1,6 @@
 {
   "name": "ol-tilecache",
-  "version": "1.2.5",
+  "version": "2.0.0-beta",
   "description": "OpenLayers tile url function to load tile seeded with TileCache url scheme",
   "main": "dist/bundle.js",
   "module": "src/index.js",
@@ -9,7 +9,7 @@
     "build": "webpack --env.build",
     "serv": "webpack-dev-server",
     "start": "npm run serv",
-    "test": "mocha-phantomjs tests/test.html"
+    "test": "npm run build && mocha-phantomjs tests/test.html"
   },
   "homepage": "https://github.com/ghettovoice/ol-tilecache",
   "repository": {
@@ -28,12 +28,11 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "openlayers": ">=3.14"
+    "ol": "^4.0"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",
-    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-latest": "^6.24.0",
     "babel-preset-stage-0": "^6.22.0",

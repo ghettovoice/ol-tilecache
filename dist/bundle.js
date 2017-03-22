@@ -2,19 +2,19 @@
  * OpenLayers tile url function to load tile seeded with TileCache url scheme
  * @package ol-tilecache
  * @author Vladimir Vershinin <ghettovoice@gmail.com>
- * @version 1.2.5
+ * @version 2.0.0-beta
  * @licence MIT https://opensource.org/licenses/MIT
  * @copyright (c) 2016-2017, Vladimir Vershinin <ghettovoice@gmail.com>
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("openlayers"));
+		module.exports = factory(require("ol/tilegrid"));
 	else if(typeof define === 'function' && define.amd)
-		define(["openlayers"], factory);
+		define(["ol/tilegrid"], factory);
 	else if(typeof exports === 'object')
-		exports["TileCacheUrlFunction"] = factory(require("openlayers"));
+		exports["tileCacheFn"] = factory(require("ol/tilegrid"));
 	else
-		root["ol"] = root["ol"] || {}, root["ol"]["TileCacheUrlFunction"] = factory(root["ol"]);
+		root["ol"] = root["ol"] || {}, root["ol"]["tileCacheFn"] = factory(root["ol"]["tilegrid"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_4__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -161,20 +161,15 @@ Object.defineProperty(exports, "__esModule", {
 
 var _tileUrlFunction = __webpack_require__(3);
 
-var tileUrlFunction = _interopRequireWildcard(_tileUrlFunction);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-exports.default = tileUrlFunction; /**
-                                    * OpenLayers tile url function to load tile seeded with TileCache url scheme.
-                                    *
-                                    * @package ol-tilecache
-                                    * @author Vladimir Vershinin <ghettovoice@gmail.com>
-                                    * @licence MIT https://opensource.org/licenses/MIT
-                                    * @copyright (c) 2016-2017, Vladimir Vershinin
-                                    */
-
-module.exports = exports['default'];
+Object.keys(_tileUrlFunction).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _tileUrlFunction[key];
+    }
+  });
+});
 
 /***/ }),
 /* 2 */
@@ -275,9 +270,9 @@ exports.createTileUrlFunction = createTileUrlFunction;
 exports.createTileUrlFunctionFromTemplate = createTileUrlFunctionFromTemplate;
 exports.createTileUrlFunctionFromTemplates = createTileUrlFunctionFromTemplates;
 
-var _openlayers = __webpack_require__(4);
+var _tilegrid = __webpack_require__(4);
 
-var _openlayers2 = _interopRequireDefault(_openlayers);
+var _tilegrid2 = _interopRequireDefault(_tilegrid);
 
 var _util = __webpack_require__(0);
 
@@ -304,7 +299,7 @@ var EPSG3857_EXTENT = [-20037508.342789244, -20037508.342789244, 20037508.342789
  * @public
  */
 function createTileUrlFunction(url) {
-  var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _openlayers2.default.tilegrid.createXYZ();
+  var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _tilegrid2.default.createXYZ();
   var extent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EPSG3857_EXTENT;
 
   return createTileUrlFunctionFromTemplates(expandUrl(url), tileGrid, extent);
@@ -320,7 +315,7 @@ function createTileUrlFunction(url) {
  * @private
  */
 function createTileUrlFunctionFromTemplate(template) {
-  var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _openlayers2.default.tilegrid.createXYZ();
+  var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _tilegrid2.default.createXYZ();
   var extent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EPSG3857_EXTENT;
 
   return (
@@ -357,7 +352,7 @@ function createTileUrlFunctionFromTemplate(template) {
  * @private
  */
 function createTileUrlFunctionFromTemplates(templates) {
-  var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _openlayers2.default.tilegrid.createXYZ();
+  var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _tilegrid2.default.createXYZ();
   var extent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EPSG3857_EXTENT;
 
   return createTileUrlFunctionFromTileUrlFunctions(templates.map(function (tileUrlFunction) {

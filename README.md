@@ -37,18 +37,18 @@ such type of installation**
 Plugin is packed into UMD wrapper, import it with CommonJS or ES6:
 
 ```js
-import * as tileCacheFn from 'ol-tilecache'
-const tileCacheFn = require('ol-tilecache')
+import * as tileCacheUrlFn from 'ol-tilecache'
+const tileCacheUrlFn = require('ol-tilecache')
 ```
 
-In Browser environment it is available as `ol.tileCacheFn`.
+In Browser environment it is available as `ol.tileCacheUrlFn`.
 ```html
 <!-- include OpenLayers dist build -->
 <script src="/js/openlayers/dist/ol.js"></script>
 <script src="/js/ol-tilecache/dist/bundle.min.js"></script>
 <script>
-  // all functions inside ol.tileCacheFn namespace
-  const tileUrlFunc = ol.tileCacheFn.createTileUrlFunction('http://tilecache_server/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png') 
+  // all functions inside ol.tileCacheUrlFn namespace
+  const tileUrlFunc = ol.tileCacheUrlFn.createTileUrlFunction('http://tilecache_server/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png') 
 </script>
 ```
 

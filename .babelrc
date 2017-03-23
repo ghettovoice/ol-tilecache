@@ -4,13 +4,17 @@
     "stage-0"
   ],
   "plugins": [
-    "transform-flow-strip-types",
-    "./build/ol-to-openlayers-transform.js"
+    "transform-flow-strip-types"
   ],
   "env": {
     "test": {
       "plugins": [
         "istanbul"
+      ]
+    },
+    "umd": {
+      "plugins": [
+        "./modules/babel-plugin-ol-to-openlayers"
       ]
     }
   }

@@ -9,13 +9,13 @@
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("ol/tilegrid"));
+		module.exports = factory(require("openlayers"));
 	else if(typeof define === 'function' && define.amd)
-		define(["ol/tilegrid"], factory);
+		define(["openlayers"], factory);
 	else if(typeof exports === 'object')
-		exports["tileCacheUrlFn"] = factory(require("ol/tilegrid"));
+		exports["tileCacheUrlFn"] = factory(require("openlayers"));
 	else
-		root["ol"] = root["ol"] || {}, root["ol"]["tileCacheUrlFn"] = factory(root["ol/tilegrid"]);
+		root["ol"] = root["ol"] || {}, root["ol"]["tileCacheUrlFn"] = factory(root["ol"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_4__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -163,15 +163,11 @@ exports.createTileUrlFunction = createTileUrlFunction;
 exports.createTileUrlFunctionFromTemplate = createTileUrlFunctionFromTemplate;
 exports.createTileUrlFunctionFromTemplates = createTileUrlFunctionFromTemplates;
 
-var _tilegrid = __webpack_require__(4);
-
-var _tilegrid2 = _interopRequireDefault(_tilegrid);
-
 var _util = __webpack_require__(0);
 
 var _tileRange = __webpack_require__(3);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _ol_ = __webpack_require__(4);
 
 var zRegEx = /\{z\}/g;
 var zPadRegEx = /\{0z\}/g;
@@ -192,7 +188,7 @@ var EPSG3857_EXTENT = [-20037508.342789244, -20037508.342789244, 20037508.342789
  * @public
  */
 function createTileUrlFunction(url) {
-  var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _tilegrid2.default.createXYZ();
+  var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _ol_.tilegrid.createXYZ();
   var extent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EPSG3857_EXTENT;
 
   return createTileUrlFunctionFromTemplates(expandUrl(url), tileGrid, extent);
@@ -208,7 +204,7 @@ function createTileUrlFunction(url) {
  * @private
  */
 function createTileUrlFunctionFromTemplate(template) {
-  var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _tilegrid2.default.createXYZ();
+  var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _ol_.tilegrid.createXYZ();
   var extent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EPSG3857_EXTENT;
 
   return (
@@ -245,7 +241,7 @@ function createTileUrlFunctionFromTemplate(template) {
  * @private
  */
 function createTileUrlFunctionFromTemplates(templates) {
-  var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _tilegrid2.default.createXYZ();
+  var tileGrid = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _ol_.tilegrid.createXYZ();
   var extent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : EPSG3857_EXTENT;
 
   return createTileUrlFunctionFromTileUrlFunctions(templates.map(function (tileUrlFunction) {
@@ -445,7 +441,7 @@ function getTileRangeHeight(tileRange) {
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = require("ol/tilegrid");
+module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
 
 /***/ })
 /******/ ]);

@@ -1,5 +1,4 @@
 const merge = require('webpack-merge')
-const nodeExternals = require('webpack-node-externals')
 const baseConfig = require('./webpack.base.config')
 
 module.exports = merge(baseConfig, {
@@ -8,7 +7,12 @@ module.exports = merge(baseConfig, {
     library: [ 'ol', 'tileCacheUrlFn' ],
     libraryTarget: 'umd'
   },
-  externals: [
-    nodeExternals()
-  ]
+  externals: [{
+    openlayers: {
+      root: 'ol',
+      amd: 'openlayers',
+      commonjs: 'openlayers',
+      commonjs2: 'openlayers'
+    }
+  }]
 })

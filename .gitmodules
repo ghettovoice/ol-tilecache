@@ -1,0 +1,3 @@
+[submodule "modules/babel-plugin-ol-to-openlayers"]
+	path = modules/babel-plugin-ol-to-openlayers
+	url = git@github.com:ghettovoice/babel-plugin-ol-to-openlayers.git

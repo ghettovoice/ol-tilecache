@@ -11,7 +11,7 @@ seeded with [TileCache](http://tilecache.org/).
 
 ## Installation
 
-Install it thought NPM or Bower:
+Install it with NPM or Bower:
 
 ```shell
 npm install ol openlayers ol-tilecache
@@ -29,7 +29,8 @@ Or download the latest versions of OpenLayers and ol-tilecache and add them with
 **ol-tilecache requires both [openlayers](https://www.npmjs.com/package/openlayers) and [ol](https://www.npmjs.com/package/ol)
 to be installed.  
 In browser or CommonJS env it uses standard [openlayers](https://www.npmjs.com/package/openlayers) package.  
-In ES2015 env it uses ES2015 modules from [ol](https://www.npmjs.com/package/ol). (assumes bundling with Webpack or Browserify)**
+In ES2015 env it uses ES2015 modules from [ol](https://www.npmjs.com/package/ol). (assumes bundling with Webpack or Browserify).
+You can install one as dependency and another as dev dependency to suppress NPM warning**
 
 ## Usage
 

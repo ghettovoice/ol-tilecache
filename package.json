@@ -5,8 +5,8 @@
   "main": "dist/bundle.js",
   "module": "src/index.js",
   "scripts": {
-    "build": "webpack --config=build/webpack.umd.config.js",
-    "build-min": "cross-env NODE_ENV=production webpack --config=build/webpack.umd.config.js",
+    "build": "cross-env BABEL_ENV=umd webpack --config=build/webpack.umd.config.js",
+    "build-min": "cross-env BABEL_ENV=umd NODE_ENV=production webpack --config=build/webpack.umd.config.js",
     "build-all": "npm run build && npm run build-min",
     "start": "webpack-dev-server --config=build/webpack.dev.config.js",
     "test": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
@@ -58,10 +58,8 @@
     "openlayers": "^4.0.1",
     "phantomjs-prebuilt": "^2.1.14",
     "webpack": "^2.3.0",
-    "webpack-bundle-analyzer": "^2.3.1",
     "webpack-dev-server": "^2.4.2",
     "webpack-merge": "^4.1.0",
-    "webpack-node-externals": "^1.5.4",
     "webpack-notifier": "^1.5.0"
   },
   "files": [

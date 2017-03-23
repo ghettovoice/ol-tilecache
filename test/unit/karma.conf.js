@@ -3,9 +3,9 @@
 // we are also using it with karma-webpack
 //   https://github.com/webpack/karma-webpack
 
-const webpackConfig = require('../webpack.config')({
-  build: true
-})
+const webpackConfig = require('../../build/webpack.base.config')
+webpackConfig.devtool = '#inline-source-map'
+delete webpackConfig.entry
 
 module.exports = function (config) {
   config.set({

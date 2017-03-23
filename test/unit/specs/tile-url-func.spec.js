@@ -1,7 +1,5 @@
-import { createTileUrlFunction } from '../../src'
-import projCommon from 'ol/proj/common'
-
-projCommon.add()
+import 'ol/map' // initialize basic projections
+import { createTileUrlFunction } from '../../../src'
 
 const urlTemplate = 'http://{a-c}.tileserver.org/{0z}/{x1}/{x2}/{x3}/{y1}/{y2}/{y3}.png'
 const flipUrlTemplate = 'http://{a-c}.tileserver.org/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png'

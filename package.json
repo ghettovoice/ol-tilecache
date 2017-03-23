@@ -5,11 +5,12 @@
   "main": "dist/bundle.js",
   "module": "src/index.js",
   "scripts": {
-    "release": "webpack --env.release",
-    "build": "webpack --env.build",
-    "serv": "webpack-dev-server",
-    "start": "npm run serv",
-    "test": "npm run build && mocha-phantomjs tests/test.html"
+    "build": "webpack --config=build/webpack.umd.config.js",
+    "build-min": "cross-env NODE_ENV=production webpack --config=build/webpack.umd.config.js",
+    "build-all": "npm run build && npm run build-min",
+    "start": "webpack-dev-server --config=build/webpack.dev.config.js",
+    "test": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
+    "coveralls": "cat test/unit/coverage/lcov.info | coveralls"
   },
   "homepage": "https://github.com/ghettovoice/ol-tilecache",
   "repository": {
@@ -19,7 +20,8 @@
   "keywords": [
     "ol",
     "openlayers",
-    "tilecache"
+    "tilecache",
+    "ol-tilecache"
   ],
   "author": "Vladimir Vershinin <ghettovoice@gmail.com>",
   "license": "MIT",
@@ -28,16 +30,20 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "ol": "^4.0"
+    "ol": ">=4.0.1-beta",
+    "openlayers": ">=3.14"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
     "babel-loader": "^6.4.1",
+    "babel-plugin-istanbul": "^4.1.1",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-latest": "^6.24.0",
     "babel-preset-stage-0": "^6.22.0",
     "chai": "^3.5.0",
+    "coveralls": "^2.12.0",
     "cross-env": "^3.2.4",
+    "html-webpack-plugin": "^2.28.0",
     "karma": "^1.5.0",
     "karma-chai": "^0.1.0",
     "karma-coverage": "^1.1.1",
@@ -52,7 +58,10 @@
     "openlayers": "^4.0.1",
     "phantomjs-prebuilt": "^2.1.14",
     "webpack": "^2.3.0",
+    "webpack-bundle-analyzer": "^2.3.1",
     "webpack-dev-server": "^2.4.2",
+    "webpack-merge": "^4.1.0",
+    "webpack-node-externals": "^1.5.4",
     "webpack-notifier": "^1.5.0"
   },
   "files": [

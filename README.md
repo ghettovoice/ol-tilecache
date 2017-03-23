@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/ghettovoice/ol-tilecache.svg?branch=master)](https://travis-ci.org/ghettovoice/ol-tilecache)
+[![Coverage Status](https://coveralls.io/repos/github/ghettovoice/ol-tilecache/badge.svg?branch=master)](https://coveralls.io/github/ghettovoice/ol-tilecache?branch=master)
 [![GitHub tag](https://img.shields.io/github/tag/ghettovoice/ol-tilecache.svg)](https://github.com/ghettovoice/ol-tilecache/releases)
 [![view on npm](http://img.shields.io/npm/v/ol-tilecache.svg)](https://www.npmjs.org/package/ol-tilecache)
 [![License](https://img.shields.io/github/license/ghettovoice/ol-tilecache.svg)](https://github.com/ghettovoice/ol-tilecache/blob/master/LICENSE)
@@ -8,47 +9,49 @@
 Allows create custom [`ol.TileUrlFunctionType`](http://openlayers.org/en/latest/apidoc/ol.html#.TileUrlFunctionType) to load tiles 
 seeded with [TileCache](http://tilecache.org/).
 
-### NOTE   
-**Current version `2.x` is aimed to work with ES2015 build of OpenLayers (NPM [ol](https://www.npmjs.com/package/ol)) and 
-bundlers like [Webpack](https://webpack.js.org/). For basic setup through `script` tag you also need to install standard version 
-of OpenLayers (NPM [openlayers](https://www.npmjs.com/package/openlayers))**
-
-Version `1.x` available at branch `master-1.x` (install with `npm install ol-tilecache@1`)
-
 ## Installation
 
 Install it thought NPM or Bower:
 
 ```shell
-npm install ol ol-tilecache
-bower install ol-tilecache
+npm install ol openlayers ol-tilecache
+bower install openlayers ol-tilecache
 ```
 
-Or download the latest version archive and add it with script tag:
+Or download the latest versions of OpenLayers and ol-tilecache and add them with script tags:
 
 ```html
-<script src="ol-tilecache/dist/bundle.min.js"></script>
+<script src="/js/openlayers/dist/ol.js"></script>
+<script src="/js/ol-tilecache/dist/bundle.min.js"></script>
 ```
-**NOTE: You also need standard build of OpenLayers (NPM [openlayers](https://www.npmjs.com/package/openlayers)) for 
-such type of installation**
+
+### Note about peer dependencies 
+**ol-tilecache requires both [openlayers](https://www.npmjs.com/package/openlayers) and [ol](https://www.npmjs.com/package/ol)
+to be installed.  
+In browser or CommonJS env it uses standard [openlayers](https://www.npmjs.com/package/openlayers) package.  
+In ES2015 env it uses ES2015 modules from [ol](https://www.npmjs.com/package/ol). (assumes bundling with Webpack or Browserify)**
 
 ## Usage
 
-Plugin is packed into UMD wrapper, import it with CommonJS or ES6:
+Plugin may be used as UMD module or ES2015 module:
 
 ```js
+// Use as ES2015 module (based on NPM package `ol`) 
+// imports source files as is from `ol-tilecache/src` directory 
+// assumes bundling with Webpack or Browserify
 import * as tileCacheUrlFn from 'ol-tilecache'
+
+// Use as CommonJS module (based on NPM package `openlayers`) without bundling 
+// imports UMD module from `ol-tilecache/dist/bundle.js` 
 const tileCacheUrlFn = require('ol-tilecache')
 ```
 
-In Browser environment it is available as `ol.tileCacheUrlFn`.
+In Browser environment you should add **script** tag pointing to UMD module after OpenLayers js files.
 ```html
-<!-- include OpenLayers dist build -->
 <script src="/js/openlayers/dist/ol.js"></script>
 <script src="/js/ol-tilecache/dist/bundle.min.js"></script>
 <script>
-  // all functions inside ol.tileCacheUrlFn namespace
-  const tileUrlFunc = ol.tileCacheUrlFn.createTileUrlFunction('http://tilecache_server/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png') 
+  // now plugin is available at `ol.tileCacheUrlFn` field
 </script>
 ```
 
@@ -80,20 +83,21 @@ import XyzSource from 'ol/source/xyz'
 import { createTileUrlFunction } from 'ol-tilecache'
 
 const map = new Map({
-    target: 'map',
-    view: new View({
-        projection: 'EPSG:3857',
-        center: [4189972.14, 7507950.67],
-        zoom: 5
-    }),
-    layers: [
-        new TileLayer({
-            source: new XyzSource({
-                tileUrlFunction: createTileUrlFunction('http://tilecache_server/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png')
-            })
-        })
-    ]
+  target: 'map',
+  view: new View({
+    projection: 'EPSG:3857',
+    center: [ 4189972.14, 7507950.67 ],
+    zoom: 5
+  }),
+  layers: [
+    new TileLayer({
+      source: new XyzSource({
+        tileUrlFunction: createTileUrlFunction('http://{a-z}.tiles.org/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png')
+      })
+    })
+  ]
 })
+
 ```
 
 ## License

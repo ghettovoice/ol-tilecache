@@ -4,11 +4,14 @@
     "stage-0"
   ],
   "plugins": [
-    "transform-flow-strip-types"
+    "transform-flow-strip-types",
+    "./build/ol-to-openlayers-transform.js"
   ],
   "env": {
     "test": {
-      "plugins": [ "istanbul" ]
+      "plugins": [
+        "istanbul"
+      ]
     }
   }
 }

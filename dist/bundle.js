@@ -1,5 +1,6 @@
 /*!
  * OpenLayers tile url function to load tile seeded with TileCache url scheme
+ * 
  * @package ol-tilecache
  * @author Vladimir Vershinin <ghettovoice@gmail.com>
  * @version 2.0.0-beta
@@ -14,7 +15,7 @@
 	else if(typeof exports === 'object')
 		exports["tileCacheUrlFn"] = factory(require("ol/tilegrid"));
 	else
-		root["ol"] = root["ol"] || {}, root["ol"]["tileCacheUrlFn"] = factory(root["ol"]["tilegrid"]);
+		root["ol"] = root["ol"] || {}, root["ol"]["tileCacheUrlFn"] = factory(root["ol/tilegrid"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_4__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -78,10 +79,10 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "/dist/";
+/******/ 	__webpack_require__.p = "/";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -158,114 +159,6 @@ function isArray(value) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _tileUrlFunction = __webpack_require__(3);
-
-Object.keys(_tileUrlFunction).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _tileUrlFunction[key];
-    }
-  });
-});
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-exports.calculateTileRangeForZ = calculateTileRangeForZ;
-exports.getTileCoordForXYAndResolution = getTileCoordForXYAndResolution;
-exports.getTileRangeHeight = getTileRangeHeight;
-
-var _util = __webpack_require__(0);
-
-/**
- * @param {ol.tilegrid.TileGrid} tileGrid
- * @param {ol.Extent} extent
- * @param {number} z
- * @return {{minX, minY, maxX, maxY}}
- */
-function calculateTileRangeForZ(tileGrid, extent, z) {
-  var resolution = tileGrid.getResolution(z);
-
-  var _getTileCoordForXYAnd = getTileCoordForXYAndResolution(tileGrid, extent[0], extent[1], resolution, false),
-      _getTileCoordForXYAnd2 = _slicedToArray(_getTileCoordForXYAnd, 2),
-      minX = _getTileCoordForXYAnd2[0],
-      minY = _getTileCoordForXYAnd2[1];
-
-  var _getTileCoordForXYAnd3 = getTileCoordForXYAndResolution(tileGrid, extent[2], extent[3], resolution, true),
-      _getTileCoordForXYAnd4 = _slicedToArray(_getTileCoordForXYAnd3, 2),
-      maxX = _getTileCoordForXYAnd4[0],
-      maxY = _getTileCoordForXYAnd4[1];
-
-  return { minX: minX, minY: minY, maxX: maxX, maxY: maxY };
-}
-
-/**
- * @param {ol.tilegrid.TileGrid} tileGrid
- * @param {number} x
- * @param {number} y
- * @param {number} resolution
- * @param {boolean} reverseIntersectionPolicy
- * @return {number[]}
- */
-function getTileCoordForXYAndResolution(tileGrid, x, y, resolution, reverseIntersectionPolicy) {
-  var z = tileGrid.getZForResolution(resolution);
-  var scale = resolution / tileGrid.getResolution(z);
-  var origin = tileGrid.getOrigin(z);
-  var tileSize = tileGrid.getTileSize(z);
-
-  if (!(0, _util.isArray)(tileSize)) {
-    tileSize = [tileSize, tileSize];
-  }
-
-  var adjustX = reverseIntersectionPolicy ? 0.5 : 0;
-  var adjustY = reverseIntersectionPolicy ? 0 : 0.5;
-  var xFromOrigin = Math.floor((x - origin[0]) / resolution + adjustX);
-  var yFromOrigin = Math.floor((y - origin[1]) / resolution + adjustY);
-  var tileCoordX = scale * xFromOrigin / tileSize[0];
-  var tileCoordY = scale * yFromOrigin / tileSize[1];
-
-  if (reverseIntersectionPolicy) {
-    tileCoordX = Math.ceil(tileCoordX) - 1;
-    tileCoordY = Math.ceil(tileCoordY) - 1;
-  } else {
-    tileCoordX = Math.floor(tileCoordX);
-    tileCoordY = Math.floor(tileCoordY);
-  }
-
-  return [tileCoordX, tileCoordY];
-}
-
-/**
- * @param {{minX, minY, maxX, maxY}} tileRange
- * @return {number}
- */
-function getTileRangeHeight(tileRange) {
-  return tileRange.maxY - tileRange.minY + 1;
-}
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
 exports.createTileUrlFunction = createTileUrlFunction;
 exports.createTileUrlFunctionFromTemplate = createTileUrlFunctionFromTemplate;
 exports.createTileUrlFunctionFromTemplates = createTileUrlFunctionFromTemplates;
@@ -276,7 +169,7 @@ var _tilegrid2 = _interopRequireDefault(_tilegrid);
 
 var _util = __webpack_require__(0);
 
-var _tileRange = __webpack_require__(2);
+var _tileRange = __webpack_require__(3);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -441,17 +334,118 @@ function createTileUrlFunctionFromTileUrlFunctions(tileUrlFunctions) {
 }
 
 /***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _tileUrlFunction = __webpack_require__(1);
+
+Object.keys(_tileUrlFunction).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function get() {
+      return _tileUrlFunction[key];
+    }
+  });
+});
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+exports.calculateTileRangeForZ = calculateTileRangeForZ;
+exports.getTileCoordForXYAndResolution = getTileCoordForXYAndResolution;
+exports.getTileRangeHeight = getTileRangeHeight;
+
+var _util = __webpack_require__(0);
+
+/**
+ * @param {ol.tilegrid.TileGrid} tileGrid
+ * @param {ol.Extent} extent
+ * @param {number} z
+ * @return {{minX, minY, maxX, maxY}}
+ */
+function calculateTileRangeForZ(tileGrid, extent, z) {
+  var resolution = tileGrid.getResolution(z);
+
+  var _getTileCoordForXYAnd = getTileCoordForXYAndResolution(tileGrid, extent[0], extent[1], resolution, false),
+      _getTileCoordForXYAnd2 = _slicedToArray(_getTileCoordForXYAnd, 2),
+      minX = _getTileCoordForXYAnd2[0],
+      minY = _getTileCoordForXYAnd2[1];
+
+  var _getTileCoordForXYAnd3 = getTileCoordForXYAndResolution(tileGrid, extent[2], extent[3], resolution, true),
+      _getTileCoordForXYAnd4 = _slicedToArray(_getTileCoordForXYAnd3, 2),
+      maxX = _getTileCoordForXYAnd4[0],
+      maxY = _getTileCoordForXYAnd4[1];
+
+  return { minX: minX, minY: minY, maxX: maxX, maxY: maxY };
+}
+
+/**
+ * @param {ol.tilegrid.TileGrid} tileGrid
+ * @param {number} x
+ * @param {number} y
+ * @param {number} resolution
+ * @param {boolean} reverseIntersectionPolicy
+ * @return {number[]}
+ */
+function getTileCoordForXYAndResolution(tileGrid, x, y, resolution, reverseIntersectionPolicy) {
+  var z = tileGrid.getZForResolution(resolution);
+  var scale = resolution / tileGrid.getResolution(z);
+  var origin = tileGrid.getOrigin(z);
+  var tileSize = tileGrid.getTileSize(z);
+
+  if (!(0, _util.isArray)(tileSize)) {
+    tileSize = [tileSize, tileSize];
+  }
+
+  var adjustX = reverseIntersectionPolicy ? 0.5 : 0;
+  var adjustY = reverseIntersectionPolicy ? 0 : 0.5;
+  var xFromOrigin = Math.floor((x - origin[0]) / resolution + adjustX);
+  var yFromOrigin = Math.floor((y - origin[1]) / resolution + adjustY);
+  var tileCoordX = scale * xFromOrigin / tileSize[0];
+  var tileCoordY = scale * yFromOrigin / tileSize[1];
+
+  if (reverseIntersectionPolicy) {
+    tileCoordX = Math.ceil(tileCoordX) - 1;
+    tileCoordY = Math.ceil(tileCoordY) - 1;
+  } else {
+    tileCoordX = Math.floor(tileCoordX);
+    tileCoordY = Math.floor(tileCoordY);
+  }
+
+  return [tileCoordX, tileCoordY];
+}
+
+/**
+ * @param {{minX, minY, maxX, maxY}} tileRange
+ * @return {number}
+ */
+function getTileRangeHeight(tileRange) {
+  return tileRange.maxY - tileRange.minY + 1;
+}
+
+/***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(1);
-
+module.exports = require("ol/tilegrid");
 
 /***/ })
 /******/ ]);

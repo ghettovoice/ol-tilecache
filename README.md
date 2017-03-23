@@ -40,10 +40,14 @@ Plugin may be used as UMD module or ES2015 module:
 // Use as ES2015 module (based on NPM package `ol`) 
 // imports source files as is from `ol-tilecache/src` directory 
 // assumes bundling with Webpack or Browserify
+import Map from 'ol/map'
+...
 import * as tileCacheUrlFn from 'ol-tilecache'
 
 // Use as CommonJS module (based on NPM package `openlayers`) without bundling 
-// imports UMD module from `ol-tilecache/dist/bundle.js` 
+// imports UMD module from `ol-tilecache/dist/bundle.js`
+const ol = require('openlayers')
+...
 const tileCacheUrlFn = require('ol-tilecache')
 ```
 
@@ -99,6 +103,25 @@ const map = new Map({
   ]
 })
 
+```
+
+### Build
+
+```bash
+git clone https://github.com/ghettovoice/ol-tilecache.git
+npm install
+
+# build UMD module
+npm run build
+npm run build-min
+# or 
+npm run build-all
+
+# run test app
+npm start
+
+# run unit tests
+npm test
 ```
 
 ## License

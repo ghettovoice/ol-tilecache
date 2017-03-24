@@ -14,7 +14,14 @@
     },
     "umd": {
       "plugins": [
-        "./modules/babel-plugin-ol-to-openlayers"
+        [
+          "./modules/babel-plugin-transform-nested-import",
+          {
+            "pkg": "openlayers",
+            "pkgVar": "_ol_",
+            "regex": "^ol(?:\/(.*))?$"
+          }
+        ]
       ]
     }
   }

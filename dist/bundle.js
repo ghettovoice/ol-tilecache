@@ -3,7 +3,7 @@
  * 
  * @package ol-tilecache
  * @author Vladimir Vershinin <ghettovoice@gmail.com>
- * @version 2.0.0-beta
+ * @version 2.0.0-beta.1
  * @licence MIT https://opensource.org/licenses/MIT
  * @copyright (c) 2016-2017, Vladimir Vershinin <ghettovoice@gmail.com>
  */
@@ -339,18 +339,20 @@ function createTileUrlFunctionFromTileUrlFunctions(tileUrlFunctions) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports.createTileUrlFunctionFromTemplates = exports.createTileUrlFunctionFromTemplate = exports.createTileUrlFunction = undefined;
 
 var _tileUrlFunction = __webpack_require__(1);
 
-Object.keys(_tileUrlFunction).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function get() {
-      return _tileUrlFunction[key];
-    }
-  });
-});
+exports.createTileUrlFunction = _tileUrlFunction.createTileUrlFunction;
+exports.createTileUrlFunctionFromTemplate = _tileUrlFunction.createTileUrlFunctionFromTemplate;
+exports.createTileUrlFunctionFromTemplates = _tileUrlFunction.createTileUrlFunctionFromTemplates; /**
+                                                                                                   * OpenLayers tile url function to load tile seeded with TileCache url scheme.
+                                                                                                   *
+                                                                                                   * @package ol-tilecache
+                                                                                                   * @author Vladimir Vershinin <ghettovoice@gmail.com>
+                                                                                                   * @licence MIT https://opensource.org/licenses/MIT
+                                                                                                   * @copyright (c) 2016-2017, Vladimir Vershinin
+                                                                                                   */
 
 /***/ }),
 /* 3 */

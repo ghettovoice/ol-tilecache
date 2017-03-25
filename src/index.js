@@ -6,4 +6,14 @@
  * @licence MIT https://opensource.org/licenses/MIT
  * @copyright (c) 2016-2017, Vladimir Vershinin
  */
-export * from './tile-url-function'
+import {
+  createTileUrlFunction,
+  createTileUrlFunctionFromTemplate,
+  createTileUrlFunctionFromTemplates
+} from './tile-url-function'
+
+export {
+  createTileUrlFunction,
+  createTileUrlFunctionFromTemplate,
+  createTileUrlFunctionFromTemplates
+}

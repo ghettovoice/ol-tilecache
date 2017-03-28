@@ -14,7 +14,7 @@ seeded with [TileCache](http://tilecache.org/).
 Install it with NPM or Bower:
 
 ```shell
-npm install ol openlayers ol-tilecache
+npm install openlayers ol-tilecache
 bower install openlayers ol-tilecache
 ```
 
@@ -25,12 +25,12 @@ Or download the latest versions of OpenLayers and ol-tilecache and add them with
 <script src="/js/ol-tilecache/dist/bundle.min.js"></script>
 ```
 
-### Note about peer dependencies 
-**ol-tilecache requires both [openlayers](https://www.npmjs.com/package/openlayers) and [ol](https://www.npmjs.com/package/ol)
-to be installed.  
-In browser or CommonJS env it uses standard [openlayers](https://www.npmjs.com/package/openlayers) package.  
-In ES2015 env it uses ES2015 modules from [ol](https://www.npmjs.com/package/ol). (assumes bundling with Webpack or Browserify).
-You can install one as dependency and another as dev dependency to suppress NPM warning**
+### Note
+**Built version of ol-tilecache from `dist` directory depends on [openlayers](https://www.npmjs.com/package/openlayers) package, 
+it is imported by default in Node or Browser env.    
+If you use bundlers like Webpack with Babel you should install [ol](https://www.npmjs.com/package/ol) manually
+because ES2015 module from `src` directory will be used that depends on [ol](https://www.npmjs.com/package/ol) package.
+You can add an alias to Webpack config to force using of built version: `ol-tilecache: 'ol-tilecache/dist/bundle'`.**
 
 ## Usage
 
@@ -38,14 +38,14 @@ Plugin may be used as UMD module or ES2015 module:
 
 ```js
 // Use as ES2015 module (based on NPM package `ol`) 
-// imports source files as is from `ol-tilecache/src` directory 
+// imports source files as is from `src` directory by default 
 // assumes bundling with Webpack or Browserify
 import Map from 'ol/map'
 ...
 import * as tileCacheUrlFn from 'ol-tilecache'
 
 // Use as CommonJS module (based on NPM package `openlayers`) without bundling 
-// imports UMD module from `ol-tilecache/dist/bundle.js`
+// imports UMD module from `dist` directory by default
 const ol = require('openlayers')
 ...
 const tileCacheUrlFn = require('ol-tilecache')

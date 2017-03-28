@@ -1,6 +1,6 @@
 {
   "name": "ol-tilecache",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "description": "OpenLayers tile url function to load tile seeded with TileCache url scheme",
   "main": "dist/bundle.js",
   "module": "src/index.js",
@@ -30,7 +30,6 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "ol": ">=4.0.1-beta",
     "openlayers": ">=3.14"
   },
   "devDependencies": {

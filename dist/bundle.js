@@ -3,7 +3,7 @@
  * 
  * @package ol-tilecache
  * @author Vladimir Vershinin <ghettovoice@gmail.com>
- * @version 2.0.0-beta.1
+ * @version 2.0.0-beta.3
  * @licence MIT https://opensource.org/licenses/MIT
  * @copyright (c) 2016-2017, Vladimir Vershinin <ghettovoice@gmail.com>
  */

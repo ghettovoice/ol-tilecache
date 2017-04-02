@@ -345,14 +345,22 @@ var _tileUrlFunction = __webpack_require__(1);
 
 exports.createTileUrlFunction = _tileUrlFunction.createTileUrlFunction;
 exports.createTileUrlFunctionFromTemplate = _tileUrlFunction.createTileUrlFunctionFromTemplate;
-exports.createTileUrlFunctionFromTemplates = _tileUrlFunction.createTileUrlFunctionFromTemplates; /**
-                                                                                                   * OpenLayers tile url function to load tile seeded with TileCache url scheme.
-                                                                                                   *
-                                                                                                   * @package ol-tilecache
-                                                                                                   * @author Vladimir Vershinin <ghettovoice@gmail.com>
-                                                                                                   * @licence MIT https://opensource.org/licenses/MIT
-                                                                                                   * @copyright (c) 2016-2017, Vladimir Vershinin
-                                                                                                   */
+exports.createTileUrlFunctionFromTemplates = _tileUrlFunction.createTileUrlFunctionFromTemplates; /* global PKG_VERSION */
+/**
+ * OpenLayers tile url function to load tile seeded with TileCache url scheme.
+ *
+ * @package ol-tilecache
+ * @author Vladimir Vershinin <ghettovoice@gmail.com>
+ * @licence MIT https://opensource.org/licenses/MIT
+ * @copyright (c) 2016-2017, Vladimir Vershinin
+ */
+
+exports.default = {
+  VERSION: '2.0.0-beta.3',
+  createTileUrlFunction: _tileUrlFunction.createTileUrlFunction,
+  createTileUrlFunctionFromTemplate: _tileUrlFunction.createTileUrlFunctionFromTemplate,
+  createTileUrlFunctionFromTemplates: _tileUrlFunction.createTileUrlFunctionFromTemplates
+};
 
 /***/ }),
 /* 3 */

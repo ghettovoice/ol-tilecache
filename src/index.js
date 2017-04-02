@@ -1,3 +1,4 @@
+/* global PKG_VERSION */
 /**
  * OpenLayers tile url function to load tile seeded with TileCache url scheme.
  *
@@ -13,6 +14,13 @@ import {
 } from './tile-url-function'
 
 export {
+  createTileUrlFunction,
+  createTileUrlFunctionFromTemplate,
+  createTileUrlFunctionFromTemplates
+}
+
+export default {
+  VERSION: PKG_VERSION,
   createTileUrlFunction,
   createTileUrlFunctionFromTemplate,
   createTileUrlFunctionFromTemplates

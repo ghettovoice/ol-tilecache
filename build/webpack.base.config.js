@@ -16,6 +16,7 @@ const banner =
 @licence MIT https://opensource.org/licenses/MIT
 @copyright (c) 2016-${new Date().getFullYear()}, ${packageJson.author}`
 
+const nodeEnv = process.env.NODE_ENV || 'development'
 const plugins = [
   new WebpackNotifierPlugin({
     title: packageJson.name,
@@ -23,9 +24,8 @@ const plugins = [
   }),
   new webpack.BannerPlugin(banner),
   new webpack.DefinePlugin({
-    'process.env': JSON.stringify({
-      NODE_ENV: process.env.NODE_ENV || 'development'
-    })
+    'process.env.NODE_ENV': `'${nodeEnv}'`,
+    PKG_VERSION: `'${packageJson.version}'`
   })
 ]
 

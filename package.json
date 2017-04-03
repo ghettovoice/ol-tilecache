@@ -1,13 +1,14 @@
 {
   "name": "ol-tilecache",
-  "version": "2.0.0-beta.3",
+  "version": "2.0.0-beta.4",
   "description": "OpenLayers tile url function to load tile seeded with TileCache url scheme",
   "main": "dist/bundle.js",
-  "module": "src/index.js",
+  "module": "dist/bundle.es.js",
   "scripts": {
-    "build": "cross-env BABEL_ENV=umd webpack --config=build/webpack.umd.config.js",
-    "build-min": "cross-env BABEL_ENV=umd NODE_ENV=production webpack --config=build/webpack.umd.config.js",
-    "build-all": "npm run build && npm run build-min",
+    "build-umd": "cross-env BABEL_ENV=umd webpack --config=build/webpack.umd.config.js",
+    "build-umd-min": "cross-env BABEL_ENV=umd NODE_ENV=production webpack --config=build/webpack.umd.config.js",
+    "build-es": "cross-env NODE_ENV=production rollup -c build/rollup.es.config.js",
+    "build": "npm run build-umd && npm run build-umd-min && npm run build-es",
     "start": "webpack-dev-server --config=build/webpack.dev.config.js",
     "test": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "coveralls": "cat test/unit/coverage/lcov.info | coveralls"

@@ -3,7 +3,7 @@
  * 
  * @package ol-tilecache
  * @author Vladimir Vershinin <ghettovoice@gmail.com>
- * @version 2.0.0-beta.3
+ * @version 2.0.0-beta.4
  * @licence MIT https://opensource.org/licenses/MIT
  * @copyright (c) 2016-2017, Vladimir Vershinin <ghettovoice@gmail.com>
  */
@@ -87,18 +87,13 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.zeroPad = zeroPad;
-exports.modulo = modulo;
-exports.assert = assert;
-exports.isArray = isArray;
+/* harmony export (immutable) */ __webpack_exports__["a"] = zeroPad;
+/* harmony export (immutable) */ __webpack_exports__["b"] = modulo;
+/* unused harmony export assert */
+/* harmony export (immutable) */ __webpack_exports__["c"] = isArray;
 /**
  * Left zero pad.
  *
@@ -151,23 +146,18 @@ function isArray(value) {
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.createTileUrlFunction = createTileUrlFunction;
-exports.createTileUrlFunctionFromTemplate = createTileUrlFunctionFromTemplate;
-exports.createTileUrlFunctionFromTemplates = createTileUrlFunctionFromTemplates;
-
-var _util = __webpack_require__(0);
-
-var _tileRange = __webpack_require__(3);
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tile_range__ = __webpack_require__(3);
+/* harmony export (immutable) */ __webpack_exports__["a"] = createTileUrlFunction;
+/* harmony export (immutable) */ __webpack_exports__["b"] = createTileUrlFunctionFromTemplate;
+/* harmony export (immutable) */ __webpack_exports__["c"] = createTileUrlFunctionFromTemplates;
 var _ol_ = __webpack_require__(4);
+
+
+
 
 var zRegEx = /\{z\}/g;
 var zPadRegEx = /\{0z\}/g;
@@ -221,8 +211,8 @@ function createTileUrlFunctionFromTemplate(template) {
         }).replace(dashYRegEx, function (part) {
           var z = tileCoord[0];
           // The {-y} placeholder requires a tile grid with extent
-          var range = (0, _tileRange.calculateTileRangeForZ)(tileGrid, extent, z);
-          var y = (0, _tileRange.getTileRangeHeight)(range) + tileCoord[2];
+          var range = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__tile_range__["a" /* calculateTileRangeForZ */])(tileGrid, extent, z);
+          var y = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__tile_range__["b" /* getTileRangeHeight */])(range) + tileCoord[2];
 
           return coordReplacer(y)(part);
         });
@@ -257,7 +247,7 @@ function createTileUrlFunctionFromTemplates(templates) {
  */
 function zoomReplacer(zoom, pad) {
   return function () {
-    return pad ? (0, _util.zeroPad)(zoom, 2) : zoom.toString();
+    return pad ? __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* zeroPad */])(zoom, 2) : zoom.toString();
   };
 }
 
@@ -271,7 +261,7 @@ function coordReplacer(coord) {
     var match = part.match(/\d/);
 
     if (match) {
-      return (0, _util.zeroPad)(coord, 9).slice((match[0] - 1) * 3, match[0] * 3);
+      return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util__["a" /* zeroPad */])(coord, 9).slice((match[0] - 1) * 3, match[0] * 3);
     }
 
     return coord.toString();
@@ -321,7 +311,7 @@ function createTileUrlFunctionFromTileUrlFunctions(tileUrlFunctions) {
     function (tileCoord, pixelRatio, projection) {
       if (tileCoord != null) {
         var h = (tileCoord[1] << tileCoord[0]) + tileCoord[2];
-        var index = (0, _util.modulo)(h, tileUrlFunctions.length);
+        var index = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util__["b" /* modulo */])(h, tileUrlFunctions.length);
 
         return tileUrlFunctions[index](tileCoord, pixelRatio, projection);
       }
@@ -331,21 +321,15 @@ function createTileUrlFunctionFromTileUrlFunctions(tileUrlFunctions) {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.createTileUrlFunctionFromTemplates = exports.createTileUrlFunctionFromTemplate = exports.createTileUrlFunction = undefined;
-
-var _tileUrlFunction = __webpack_require__(1);
-
-exports.createTileUrlFunction = _tileUrlFunction.createTileUrlFunction;
-exports.createTileUrlFunctionFromTemplate = _tileUrlFunction.createTileUrlFunctionFromTemplate;
-exports.createTileUrlFunctionFromTemplates = _tileUrlFunction.createTileUrlFunctionFromTemplates; /* global PKG_VERSION */
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__tile_url_function__ = __webpack_require__(1);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createTileUrlFunction", function() { return __WEBPACK_IMPORTED_MODULE_0__tile_url_function__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createTileUrlFunctionFromTemplate", function() { return __WEBPACK_IMPORTED_MODULE_0__tile_url_function__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createTileUrlFunctionFromTemplates", function() { return __WEBPACK_IMPORTED_MODULE_0__tile_url_function__["c"]; });
+/* global PKG_VERSION */
 /**
  * OpenLayers tile url function to load tile seeded with TileCache url scheme.
  *
@@ -355,31 +339,27 @@ exports.createTileUrlFunctionFromTemplates = _tileUrlFunction.createTileUrlFunct
  * @copyright (c) 2016-2017, Vladimir Vershinin
  */
 
-exports.default = {
-  VERSION: '2.0.0-beta.3',
-  createTileUrlFunction: _tileUrlFunction.createTileUrlFunction,
-  createTileUrlFunctionFromTemplate: _tileUrlFunction.createTileUrlFunctionFromTemplate,
-  createTileUrlFunctionFromTemplates: _tileUrlFunction.createTileUrlFunctionFromTemplates
-};
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  VERSION: '2.0.0-beta.4',
+  createTileUrlFunction: __WEBPACK_IMPORTED_MODULE_0__tile_url_function__["a" /* createTileUrlFunction */],
+  createTileUrlFunctionFromTemplate: __WEBPACK_IMPORTED_MODULE_0__tile_url_function__["b" /* createTileUrlFunctionFromTemplate */],
+  createTileUrlFunctionFromTemplates: __WEBPACK_IMPORTED_MODULE_0__tile_url_function__["c" /* createTileUrlFunctionFromTemplates */]
+});
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__util__ = __webpack_require__(0);
+/* harmony export (immutable) */ __webpack_exports__["a"] = calculateTileRangeForZ;
+/* unused harmony export getTileCoordForXYAndResolution */
+/* harmony export (immutable) */ __webpack_exports__["b"] = getTileRangeHeight;
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-exports.calculateTileRangeForZ = calculateTileRangeForZ;
-exports.getTileCoordForXYAndResolution = getTileCoordForXYAndResolution;
-exports.getTileRangeHeight = getTileRangeHeight;
-
-var _util = __webpack_require__(0);
 
 /**
  * @param {ol.tilegrid.TileGrid} tileGrid
@@ -417,7 +397,7 @@ function getTileCoordForXYAndResolution(tileGrid, x, y, resolution, reverseInter
   var origin = tileGrid.getOrigin(z);
   var tileSize = tileGrid.getTileSize(z);
 
-  if (!(0, _util.isArray)(tileSize)) {
+  if (!__webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__util__["c" /* isArray */])(tileSize)) {
     tileSize = [tileSize, tileSize];
   }
 

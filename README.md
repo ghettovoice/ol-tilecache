@@ -16,6 +16,8 @@ Install it with NPM or Bower:
 ```shell
 npm install openlayers ol-tilecache
 bower install openlayers ol-tilecache
+// if you plan use ES2015 versionof the plugin
+npm install ol
 ```
 
 Or download the latest versions of OpenLayers and ol-tilecache and add them with script tags:
@@ -26,26 +28,24 @@ Or download the latest versions of OpenLayers and ol-tilecache and add them with
 ```
 
 ### Note
-**Built version of ol-tilecache from `dist` directory depends on [openlayers](https://www.npmjs.com/package/openlayers) package, 
-it is imported by default in Node or Browser env.    
-If you use bundlers like Webpack with Babel you should install [ol](https://www.npmjs.com/package/ol) manually
-because ES2015 module from `src` directory will be used that depends on [ol](https://www.npmjs.com/package/ol) package.
-You can add an alias to Webpack config to force using of built version: `ol-tilecache: 'ol-tilecache/dist/bundle'`.**
+**Plugin is available in 2 versions: as UMD module and as ES2015 module:**
+- **UMD version (`dist/bundle[.min].js`) should be used with [openlayers](https://www.npmjs.com/package/openlayers) package.**
+- **ES2015 version (`dist/bundle.es.js`) should be used with [ol](https://www.npmjs.com/package/ol) package (you should
+  install it manually)``**
 
 ## Usage
 
 Plugin may be used as UMD module or ES2015 module:
 
 ```js
-// Use as ES2015 module (based on NPM package `ol`) 
-// imports source files as is from `src` directory by default 
-// assumes bundling with Webpack or Browserify
+// Use as ES2015 module (based on NPM package `ol`)
 import Map from 'ol/map'
 ...
-import * as tileCacheUrlFn from 'ol-tilecache'
+import tileCacheUrlFn from 'ol-tilecache'
+// or only what you need
+import { createTileUrlFunction } from 'ol-tilecache'
 
-// Use as CommonJS module (based on NPM package `openlayers`) without bundling 
-// imports UMD module from `dist` directory by default
+// Use as UMD module (based on NPM package `openlayers`)
 const ol = require('openlayers')
 ...
 const tileCacheUrlFn = require('ol-tilecache')

@@ -14,10 +14,9 @@ seeded with [TileCache](http://tilecache.org/).
 Install it with NPM or Bower:
 
 ```shell
-npm install openlayers ol-tilecache
+// install both ol and openlayers packages
+npm install ol openlayers ol-tilecache
 bower install openlayers ol-tilecache
-// if you plan use ES2015 versionof the plugin
-npm install ol
 ```
 
 Or download the latest versions of OpenLayers and ol-tilecache and add them with script tags:
@@ -29,9 +28,10 @@ Or download the latest versions of OpenLayers and ol-tilecache and add them with
 
 ### Note
 **Plugin is available in 2 versions: as UMD module and as ES2015 module:**
-- **UMD version (`dist/bundle[.min].js`) should be used with [openlayers](https://www.npmjs.com/package/openlayers) package.**
+- **UMD version (`dist/bundle[.min].js`) should be used with [openlayers](https://www.npmjs.com/package/openlayers) package.
+  You can install `ol` package as dev dependency to suppress NPM warning about required peer dependencies.**
 - **ES2015 version (`dist/bundle.es.js`) should be used with [ol](https://www.npmjs.com/package/ol) package (you should
-  install it manually)``**
+  install it manually). You can install `openlayers` package as dev dependency to suppress NPM warning about required peer dependencies.**
 
 ## Usage
 
@@ -114,8 +114,8 @@ npm install
 # build UMD module
 npm run build
 npm run build-min
-# or 
-npm run build-all
+# or build all 
+npm run build
 
 # run test app
 npm start

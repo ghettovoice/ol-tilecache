@@ -3,7 +3,7 @@ OpenLayers tile url function to load tile seeded with TileCache url scheme
 
 @package ol-tilecache
 @author Vladimir Vershinin <ghettovoice@gmail.com>
-@version 2.0.0-beta.4
+@version 2.0.0
 @licence MIT https://opensource.org/licenses/MIT
 @copyright (c) 2016-2017, Vladimir Vershinin <ghettovoice@gmail.com>
 */
@@ -281,7 +281,7 @@ function createTileUrlFunctionFromTileUrlFunctions(tileUrlFunctions) {
   );
 }
 
-/* global '2.0.0-beta.4' */
+/* global '2.0.0' */
 /**
  * OpenLayers tile url function to load tile seeded with TileCache url scheme.
  *
@@ -291,7 +291,7 @@ function createTileUrlFunctionFromTileUrlFunctions(tileUrlFunctions) {
  * @copyright (c) 2016-2017, Vladimir Vershinin
  */
 var index = {
-  VERSION: '2.0.0-beta.4',
+  VERSION: '2.0.0',
   createTileUrlFunction: createTileUrlFunction,
   createTileUrlFunctionFromTemplate: createTileUrlFunctionFromTemplate,
   createTileUrlFunctionFromTemplates: createTileUrlFunctionFromTemplates

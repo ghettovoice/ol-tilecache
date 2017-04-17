@@ -1,6 +1,6 @@
 {
   "name": "ol-tilecache",
-  "version": "2.0.0-beta.4",
+  "version": "2.0.0",
   "description": "OpenLayers tile url function to load tile seeded with TileCache url scheme",
   "main": "dist/bundle.js",
   "module": "dist/bundle.es.js",
@@ -22,7 +22,12 @@
     "ol",
     "openlayers",
     "tilecache",
-    "ol-tilecache"
+    "ol-tilecache",
+    "tile url function",
+    "map",
+    "mapping",
+    "ol plugins",
+    "openlayers plugins"
   ],
   "author": "Vladimir Vershinin <ghettovoice@gmail.com>",
   "license": "MIT",
@@ -31,7 +36,8 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "openlayers": ">=3.14"
+    "openlayers": ">=3.14",
+    "ol": ">=4.1"
   },
   "devDependencies": {
     "babel-core": "^6.24.0",
@@ -54,8 +60,8 @@
     "karma-webpack": "^2.0.3",
     "mocha": "^3.2.0",
     "mocha-phantomjs": "^4.1.0",
-    "ol": "^4.0.1-beta.2",
-    "openlayers": "^4.0.1",
+    "ol": "^4.1.0",
+    "openlayers": "^4.1.0",
     "phantomjs-prebuilt": "^2.1.14",
     "rollup": "^0.41.6",
     "rollup-plugin-babel": "^2.7.1",

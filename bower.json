@@ -9,7 +9,13 @@
   "keywords": [
     "ol",
     "openlayers",
-    "tilecache"
+    "tilecache",
+    "ol-tilecache",
+    "tile url function",
+    "map",
+    "mapping",
+    "ol plugins",
+    "openlayers plugins"
   ],
   "homepage": "https://github.com/ghettovoice/ol-tilecache",
   "repository": {

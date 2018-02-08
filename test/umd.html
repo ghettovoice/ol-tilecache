@@ -19,6 +19,7 @@
   <script src="../node_modules/openlayers/dist/ol.js"></script>
   <script src="../dist/bundle.js"></script>
   <script>
+    console.log(window)
     const map = new ol.Map({
       target: 'map',
       view: new ol.View({
@@ -29,7 +30,7 @@
       layers: [
         new ol.layer.Tile({
           source: new ol.source.XYZ({
-            tileUrlFunction: ol.tileCacheUrlFn.createTileUrlFunction('http://{a-z}.tiles.org/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png')
+            tileUrlFunction: TileCacheUrlFn.createTileUrlFunction('http://{a-z}.tiles.org/{0z}/{x1}/{x2}/{x3}/{-y1}/{-y2}/{-y3}.png')
           })
         })
       ]

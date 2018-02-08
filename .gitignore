@@ -115,3 +115,9 @@ typings/
 
 # dotenv environment variables file
 .env
+
+### App
+/dist
+/lib
+/out
+/test/unit/coverage

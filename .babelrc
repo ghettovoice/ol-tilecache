@@ -1,14 +1,12 @@
 {
   "presets": [
-    ["latest", {
-      "es2015": {
+    [
+      "env",
+      {
         "modules": false
       }
-    }],
+    ],
     "stage-0"
-  ],
-  "plugins": [
-    "transform-flow-strip-types"
   ],
   "env": {
     "test": {
@@ -16,13 +14,19 @@
         "istanbul"
       ]
     },
+    "es": {
+      "plugins": [
+        "external-helpers"
+      ]
+    },
     "umd": {
       "plugins": [
+        "external-helpers",
         [
           "./modules/babel-plugin-merge-imports",
           {
             "pkg": "openlayers",
-            "pkgVar": "__ol",
+            "pkgVar": "__ol__",
             "regex": "^ol(?:\/(.*))?$"
           }
         ]

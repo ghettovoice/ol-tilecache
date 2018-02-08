@@ -1,3 +1,9 @@
+/**
+ * This file is part of ol-tilecache package.
+ * @module ol-tilecache
+ * @license MIT
+ * @author Vladimir Vershinin
+ */
 import tilegrid from 'ol/tilegrid'
 import { zeroPad, modulo } from './util'
 import { calculateTileRangeForZ, getTileRangeHeight } from './tile-range'

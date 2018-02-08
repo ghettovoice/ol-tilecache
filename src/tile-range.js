@@ -1,3 +1,9 @@
+/**
+ * This file is part of ol-tilecache package.
+ * @module ol-tilecache
+ * @license MIT
+ * @author Vladimir Vershinin
+ */
 import { isArray } from './util'
 /**
  * @param {ol.tilegrid.TileGrid} tileGrid

@@ -14,24 +14,25 @@ seeded with [TileCache](http://tilecache.org/).
 Install it with NPM or Bower:
 
 ```shell
-// install both ol and openlayers packages
-npm install ol openlayers ol-tilecache
-bower install openlayers ol-tilecache
+# ES6 version for bundling with Webpack, Rollup and etc.
+npm install ol ol-tilecache
+# to use UMD version `openlayers` package should be installed
+npm install openlayers
 ```
 
 Or download the latest versions of OpenLayers and ol-tilecache and add them with script tags:
 
 ```html
-<script src="/js/openlayers/dist/ol.js"></script>
-<script src="/js/ol-tilecache/dist/bundle.min.js"></script>
+<script src="https://unpkg.com/openlayers@latest/dist/ol.js"></script>
+<script src="https://unpkg.com/ol-tilecache@latest/dist/bundle.min.js"></script>
 ```
 
 ### Note
 **Plugin is available in 2 versions: as UMD module and as ES2015 module:**
+- **RECOMMENDED: ES2015 version (`dist/bundle.es.js`) should be used with [ol](https://www.npmjs.com/package/ol) package (you should
+  install it manually).**
 - **UMD version (`dist/bundle[.min].js`) should be used with [openlayers](https://www.npmjs.com/package/openlayers) package.
   You can install `ol` package as dev dependency to suppress NPM warning about required peer dependencies.**
-- **ES2015 version (`dist/bundle.es.js`) should be used with [ol](https://www.npmjs.com/package/ol) package (you should
-  install it manually). You can install `openlayers` package as dev dependency to suppress NPM warning about required peer dependencies.**
 
 ## Usage
 
@@ -41,22 +42,23 @@ Plugin may be used as UMD module or ES2015 module:
 // Use as ES2015 module (based on NPM package `ol`)
 import Map from 'ol/map'
 ...
-import tileCacheUrlFn from 'ol-tilecache'
+import * as TileCacheUrlFn from 'ol-tilecache'
 // or only what you need
 import { createTileUrlFunction } from 'ol-tilecache'
 
 // Use as UMD module (based on NPM package `openlayers`)
 const ol = require('openlayers')
 ...
-const tileCacheUrlFn = require('ol-tilecache')
+const TileCacheUrlFn = require('ol-tilecache')
 ```
 
 In Browser environment you should add **script** tag pointing to UMD module after OpenLayers js files.
 ```html
-<script src="/js/openlayers/dist/ol.js"></script>
-<script src="/js/ol-tilecache/dist/bundle.min.js"></script>
+<script src="https://unpkg.com/openlayers@latest/dist/ol.js"></script>
+<script src="https://unpkg.com/ol-tilecache@latest/dist/bundle.min.js"></script>
 <script>
-  // now plugin is available at `ol.tileCacheUrlFn` field
+  // plugin exports global variable TileCacheUrlFn
+  // in addition it also exported to `ol.tileCacheUrlFn` field (for backward compatibility).
 </script>
 ```
 
@@ -110,20 +112,14 @@ const map = new Map({
 ```bash
 git clone https://github.com/ghettovoice/ol-tilecache.git
 npm install
-
-# build UMD module
+# build
 npm run build
-npm run build-min
-# or build all 
-npm run build
-
 # run test app
 npm start
-
 # run unit tests
 npm test
 ```
 
 ## License
 
-MIT (c) 2016-2017, Vladimir Vershinin
+MIT (c) 2016-2018, Vladimir Vershinin

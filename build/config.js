@@ -8,7 +8,7 @@ ${packageJson.description}
 @package ${packageJson.name}
 @author ${packageJson.author}
 @version ${packageJson.version}
-@licence MIT
+@licence ${packageJson.license}
 @copyright (c) 2016-${new Date().getFullYear()}, ${packageJson.author}
 */`
 
@@ -23,4 +23,5 @@ module.exports = {
     'process.env.NODE_ENV': `'${env}'`,
     PKG_VERSION: `'${packageJson.version}'`,
   },
+  external: id => /(babel-runtime|openlayers|ol\/.+)/i.test(id),
 }

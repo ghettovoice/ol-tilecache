@@ -20,7 +20,7 @@ npm install ol ol-tilecache
 npm install openlayers
 ```
 
-Or download the latest versions of OpenLayers and ol-tilecache and add them with script tags:
+Or add from CDN:
 
 ```html
 <script src="https://unpkg.com/openlayers@latest/dist/ol.js"></script>

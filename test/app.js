@@ -2,7 +2,8 @@ import Map from 'ol/map'
 import View from 'ol/view'
 import TileLayer from 'ol/layer/tile'
 import XyzSource from 'ol/source/xyz'
-import { createTileUrlFunction } from 'ol-tilecache'
+import 'ol/ol.css'
+import { createTileUrlFunction } from '../src'
 
 const map = new Map({
   target: 'map',

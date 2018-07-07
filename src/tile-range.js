@@ -6,8 +6,8 @@
  */
 import { isArray } from './util'
 /**
- * @param {ol.tilegrid.TileGrid} tileGrid
- * @param {ol.Extent} extent
+ * @param {TileGrid} tileGrid
+ * @param {number[]} extent
  * @param {number} z
  * @return {{minX, minY, maxX, maxY}}
  */
@@ -20,7 +20,7 @@ export function calculateTileRangeForZ (tileGrid, extent, z) {
 }
 
 /**
- * @param {ol.tilegrid.TileGrid} tileGrid
+ * @param {TileGrid} tileGrid
  * @param {number} x
  * @param {number} y
  * @param {number} resolution

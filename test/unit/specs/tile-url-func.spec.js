@@ -1,4 +1,4 @@
-import 'ol/map' // initialize basic projections
+import 'ol/Map' // initialize basic projections
 import { createTileUrlFunction } from '../../../src'
 
 const urlTemplate = 'http://{a-c}.tileserver.org/{0z}/{x1}/{x2}/{x3}/{y1}/{y2}/{y3}.png'

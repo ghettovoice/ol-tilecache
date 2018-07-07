@@ -4,15 +4,15 @@
  * @license MIT
  * @author Vladimir Vershinin
  */
-import tilegrid from 'ol/tilegrid'
+import {createXYZ} from 'ol/tilegrid'
 import { zeroPad, modulo } from './util'
 import { calculateTileRangeForZ, getTileRangeHeight } from './tile-range'
 
-const zRegEx = /\{z\}/g
-const zPadRegEx = /\{0z\}/g
-const xRegEx = /\{x\d?\}/g
-const yRegEx = /\{y\d?\}/g
-const dashYRegEx = /\{-y\d?\}/g
+const zRegEx = /{z}/g
+const zPadRegEx = /{0z}/g
+const xRegEx = /{x\d?}/g
+const yRegEx = /{y\d?}/g
+const dashYRegEx = /{-y\d?}/g
 
 const EPSG3857_EXTENT = [
   -20037508.342789244,
@@ -25,13 +25,13 @@ const EPSG3857_EXTENT = [
  * Basic create factory.
  *
  * @param {string} url Url template
- * @param {ol.tilegrid.TileGrid} [tileGrid] Tile grid.
- * @param {ol.Extent | number[]} [extent] Tile grid extent.
- * @returns {ol.TileUrlFunctionType}
+ * @param {TileGrid} [tileGrid] Tile grid.
+ * @param {Extent|number[]} [extent] Tile grid extent.
+ * @returns {function(tileCoord: TileCoord)}
  * @static
  * @public
  */
-export function createTileUrlFunction (url, tileGrid = tilegrid.createXYZ(), extent = EPSG3857_EXTENT) {
+export function createTileUrlFunction (url, tileGrid = createXYZ(), extent = EPSG3857_EXTENT) {
   return createTileUrlFunctionFromTemplates(expandUrl(url), tileGrid, extent)
 }
 
@@ -39,15 +39,15 @@ export function createTileUrlFunction (url, tileGrid = tilegrid.createXYZ(), ext
  * Creates tile URL function from single template.
  *
  * @param {string} template Source url
- * @param {ol.tilegrid.TileGrid} [tileGrid] Tile grid.
- * @param {ol.Extent | number[]} [extent] Tile grid extent.
- * @returns {ol.TileUrlFunctionType}
+ * @param {TileGrid} [tileGrid] Tile grid.
+ * @param {Extent|number[]} [extent] Tile grid extent.
+ * @returns {function(tileCoord: TileCoord)}
  * @private
  */
-export function createTileUrlFunctionFromTemplate (template, tileGrid = tilegrid.createXYZ(), extent = EPSG3857_EXTENT) {
+export function createTileUrlFunctionFromTemplate (template, tileGrid = createXYZ(), extent = EPSG3857_EXTENT) {
   return (
     /**
-     * @param {ol.TileCoord} tileCoord Tile Coordinate.
+     * @param {TileCoord} tileCoord Tile Coordinate.
      * @return {string | undefined} Tile URL.
      */
       function (tileCoord) {
@@ -76,12 +76,12 @@ export function createTileUrlFunctionFromTemplate (template, tileGrid = tilegrid
  * Creates tile URL function from multiple templates.
  *
  * @param {string[]} templates Url templates
- * @param {ol.tilegrid.TileGrid} [tileGrid] Tile grid.
- * @param {ol.Extent | number[]} [extent] Tile grid extent.
- * @returns {ol.TileUrlFunctionType}
+ * @param {TileGrid} [tileGrid] Tile grid.
+ * @param {Extent | number[]} [extent] Tile grid extent.
+ * @returns {function(tileCoord: TileCoord)}
  * @private
  */
-export function createTileUrlFunctionFromTemplates (templates, tileGrid = tilegrid.createXYZ(), extent = EPSG3857_EXTENT) {
+export function createTileUrlFunctionFromTemplates (templates, tileGrid = createXYZ(), extent = EPSG3857_EXTENT) {
   return createTileUrlFunctionFromTileUrlFunctions(
     templates.map(tileUrlFunction => createTileUrlFunctionFromTemplate(tileUrlFunction, tileGrid, extent))
   )
@@ -123,8 +123,8 @@ function coordReplacer (coord) {
  */
 function expandUrl (url) {
   const urls = []
-  const match = /\{(\d)-(\d)\}/.exec(url) ||
-                /\{([a-z])-([a-z])\}/.exec(url)
+  const match = /{(\d)-(\d)}/.exec(url) ||
+                /{([a-z])-([a-z])}/.exec(url)
 
   if (match) {
     const startCharCode = match[ 1 ].charCodeAt(0)
@@ -141,8 +141,8 @@ function expandUrl (url) {
 }
 
 /**
- * @param {Array.<ol.TileUrlFunctionType>} tileUrlFunctions
- * @returns {ol.TileUrlFunctionType}
+ * @param {Array.<function(tileCoord: TileCoord)>} tileUrlFunctions
+ * @returns {function(tileCoord: TileCoord)}
  * @private
  */
 function createTileUrlFunctionFromTileUrlFunctions (tileUrlFunctions) {
@@ -152,9 +152,9 @@ function createTileUrlFunctionFromTileUrlFunctions (tileUrlFunctions) {
 
   return (
     /**
-     * @param {ol.TileCoord} tileCoord Tile Coordinate.
+     * @param {TileCoord} tileCoord Tile Coordinate.
      * @param {number} pixelRatio Pixel ratio.
-     * @param {ol.proj.Projection} projection Projection.
+     * @param {Projection} projection Projection.
      * @return {string | undefined} Tile URL.
      */
       function (tileCoord, pixelRatio, projection) {

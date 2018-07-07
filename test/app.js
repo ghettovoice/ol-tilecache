@@ -1,7 +1,7 @@
-import Map from 'ol/map'
-import View from 'ol/view'
-import TileLayer from 'ol/layer/tile'
-import XyzSource from 'ol/source/xyz'
+import Map from 'ol/Map'
+import View from 'ol/View'
+import TileLayer from 'ol/layer/Tile'
+import XyzSource from 'ol/source/XYZ'
 import 'ol/ol.css'
 import { createTileUrlFunction } from '../src'
 

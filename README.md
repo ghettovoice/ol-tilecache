@@ -9,6 +9,9 @@
 Allows create custom [`ol.TileUrlFunctionType`](http://openlayers.org/en/latest/apidoc/ol.html#.TileUrlFunctionType) to load tiles 
 seeded with [TileCache](http://tilecache.org/).
 
+`ol-tilecache` **v3.x** is aiming to support **OpenLayers 5**. To use it with previous versions of the OpenLayers
+you should install **v2.x** version. 
+
 ## Installation
 
 Install it with NPM (recommended):

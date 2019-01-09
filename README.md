@@ -130,4 +130,4 @@ npm test
 
 ## License
 
-MIT (c) 2016-2018, Vladimir Vershinin
+MIT (c) 2016-2019, Vladimir Vershinin

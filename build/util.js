@@ -12,6 +12,7 @@ function plugins (options = {}) {
       sourceMap: true,
       include: [
         'src/**/*',
+        'node_modules/ol/**/*',
       ],
     }),
     resolve({
@@ -25,7 +26,7 @@ function plugins (options = {}) {
   if (options.min) {
     plugins.push(uglify({
       mangle: true,
-      sourceMap: true,
+      sourcemap: true,
       compress: {
         warnings: false,
       },

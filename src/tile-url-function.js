@@ -4,9 +4,8 @@
  * @license MIT
  * @author Vladimir Vershinin
  */
-import {createXYZ} from 'ol/tilegrid'
-import { zeroPad, modulo } from './util'
-import { calculateTileRangeForZ, getTileRangeHeight } from './tile-range'
+import { createXYZ } from 'ol/tilegrid'
+import { modulo, zeroPad } from './util'
 
 const zRegEx = /{z}/g
 const zPadRegEx = /{0z}/g
@@ -18,7 +17,7 @@ const EPSG3857_EXTENT = [
   -20037508.342789244,
   -20037508.342789244,
   20037508.342789244,
-  20037508.342789244
+  20037508.342789244,
 ]
 
 /**
@@ -50,21 +49,17 @@ export function createTileUrlFunctionFromTemplate (template, tileGrid = createXY
      * @param {TileCoord} tileCoord Tile Coordinate.
      * @return {string | undefined} Tile URL.
      */
-      function (tileCoord) {
+    function (tileCoord) {
       if (tileCoord != null) {
-        return template.replace(zRegEx, zoomReplacer(tileCoord[ 0 ]))
-          .replace(zPadRegEx, zoomReplacer(tileCoord[ 0 ], true))
-          .replace(xRegEx, coordReplacer(tileCoord[ 1 ]))
-          .replace(yRegEx, function (part) {
-            const y = -tileCoord[ 2 ] - 1
-
-            return coordReplacer(y)(part)
-          })
+        return template.replace(zRegEx, zoomReplacer(tileCoord[0]))
+          .replace(zPadRegEx, zoomReplacer(tileCoord[0], true))
+          .replace(xRegEx, coordReplacer(tileCoord[1]))
+          .replace(yRegEx, coordReplacer(tileCoord[2]))
           .replace(dashYRegEx, function (part) {
-            const z = tileCoord[ 0 ]
-            // The {-y} placeholder requires a tile grid with extent
-            const range = calculateTileRangeForZ(tileGrid, extent, z)
-            const y = getTileRangeHeight(range) + tileCoord[ 2 ]
+            const z = tileCoord[0]
+            const range = tileGrid.getFullTileRange(z)
+            if (!range) throw new Error('The {-y} placeholder requires a tile grid with extent.')
+            const y = range.getHeight() - tileCoord[2] - 1
 
             return coordReplacer(y)(part)
           })
@@ -83,7 +78,7 @@ export function createTileUrlFunctionFromTemplate (template, tileGrid = createXY
  */
 export function createTileUrlFunctionFromTemplates (templates, tileGrid = createXYZ(), extent = EPSG3857_EXTENT) {
   return createTileUrlFunctionFromTileUrlFunctions(
-    templates.map(tileUrlFunction => createTileUrlFunctionFromTemplate(tileUrlFunction, tileGrid, extent))
+    templates.map(tileUrlFunction => createTileUrlFunctionFromTemplate(tileUrlFunction, tileGrid, extent)),
   )
 }
 
@@ -109,7 +104,7 @@ function coordReplacer (coord) {
     const match = part.match(/\d/)
 
     if (match) {
-      return zeroPad(coord, 9).slice((match[ 0 ] - 1) * 3, match[ 0 ] * 3)
+      return zeroPad(coord, 9).slice((match[0] - 1) * 3, match[0] * 3)
     }
 
     return coord.toString()
@@ -124,14 +119,14 @@ function coordReplacer (coord) {
 function expandUrl (url) {
   const urls = []
   const match = /{(\d)-(\d)}/.exec(url) ||
-                /{([a-z])-([a-z])}/.exec(url)
+    /{([a-z])-([a-z])}/.exec(url)
 
   if (match) {
-    const startCharCode = match[ 1 ].charCodeAt(0)
-    const stopCharCode = match[ 2 ].charCodeAt(0)
+    const startCharCode = match[1].charCodeAt(0)
+    const stopCharCode = match[2].charCodeAt(0)
 
     for (let charCode = startCharCode; charCode <= stopCharCode; ++charCode) {
-      urls.push(url.replace(match[ 0 ], String.fromCharCode(charCode)))
+      urls.push(url.replace(match[0], String.fromCharCode(charCode)))
     }
   } else {
     urls.push(url)
@@ -147,7 +142,7 @@ function expandUrl (url) {
  */
 function createTileUrlFunctionFromTileUrlFunctions (tileUrlFunctions) {
   if (tileUrlFunctions.length === 1) {
-    return tileUrlFunctions[ 0 ]
+    return tileUrlFunctions[0]
   }
 
   return (
@@ -157,12 +152,12 @@ function createTileUrlFunctionFromTileUrlFunctions (tileUrlFunctions) {
      * @param {Projection} projection Projection.
      * @return {string | undefined} Tile URL.
      */
-      function (tileCoord, pixelRatio, projection) {
+    function (tileCoord, pixelRatio, projection) {
       if (tileCoord != null) {
-        const h = (tileCoord[ 1 ] << tileCoord[ 0 ]) + tileCoord[ 2 ]
+        const h = (tileCoord[1] << tileCoord[0]) + tileCoord[2]
         const index = modulo(h, tileUrlFunctions.length)
 
-        return tileUrlFunctions[ index ](tileCoord, pixelRatio, projection)
+        return tileUrlFunctions[index](tileCoord, pixelRatio, projection)
       }
     })
 }

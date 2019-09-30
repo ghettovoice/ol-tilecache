@@ -11,15 +11,16 @@
       padding : 0;
     }
   </style>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/openlayers@4.6.5/dist/ol.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.0/css/ol.css" />
 </head>
 <body>
   <div id="map"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/openlayers@4.6.5/dist/ol.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.0/build/ol.js"></script>
   <script src="../dist/bundle.js"></script>
   <script>
     console.log(window)
+
     const map = new ol.Map({
       target: 'map',
       view: new ol.View({

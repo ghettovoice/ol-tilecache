@@ -7,7 +7,7 @@
 import {
   createTileUrlFunction,
   createTileUrlFunctionFromTemplate,
-  createTileUrlFunctionFromTemplates
+  createTileUrlFunctionFromTemplates,
 } from './tile-url-function'
 
 export {
@@ -17,7 +17,7 @@ export {
 }
 
 // for backward compatibility
-if (typeof window !== 'undefined' && window.ol) {
+if (typeof window !== 'undefined' && typeof window.ol === 'object') {
   window.ol.tileCacheUrlFn = {
     createTileUrlFunction,
     createTileUrlFunctionFromTemplate,

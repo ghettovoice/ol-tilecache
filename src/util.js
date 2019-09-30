@@ -39,18 +39,3 @@ export function modulo (a, b) {
 
   return (m * b) < 0 ? m + b : m
 }
-
-/**
- * @param {*} value
- * @param {string} [message]
- * @throws {Error} Throws on false value
- */
-export function assert (value, message = 'Assertion failed') {
-  if (!value) {
-    throw new Error(message)
-  }
-}
-
-export function isArray (value) {
-  return Object.prototype.toString.call(value) === '[object Array]'
-}

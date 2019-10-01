@@ -15,12 +15,12 @@
     },
     "es": {
       "plugins": [
-        "external-helpers"
+        "@babel/plugin-external-helpers"
       ]
     },
     "umd": {
       "plugins": [
-        "external-helpers",
+        "@babel/plugin-external-helpers",
         [
           "./modules/babel-plugin-merge-imports",
           {

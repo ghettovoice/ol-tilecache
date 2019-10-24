@@ -2,20 +2,6 @@ const path = require('path')
 const config = require('./config')
 const util = require('./util')
 
-const output = {
-  format: 'umd',
-  file: path.join(__dirname, `../dist/bundle.js`),
-  sourcemap: true,
-  banner: config.banner,
-  name: config.name,
-  globals: {
-    openlayers: 'ol',
-  },
-  amd: {
-    id: config.amdName,
-  },
-}
-
 module.exports = [
   {
     input: config.input,
@@ -24,18 +10,30 @@ module.exports = [
       replace: config.replace,
       banner: config.banner,
     }),
-    output,
+    output: {
+      format: 'es',
+      file: path.join(__dirname, `../dist/index.js`),
+      sourcemap: true,
+      banner: config.banner,
+      name: config.name,
+    },
   },
   {
     input: config.input,
     external: config.external,
     plugins: util.plugins({
-      min: true,
       replace: config.replace,
       banner: config.banner,
     }),
-    output: Object.assign({}, output, {
-      file: path.join(__dirname, `../dist/bundle.min.js`),
-    }),
+    output: {
+      format: 'iife',
+      file: path.join(__dirname, `../dist/index.iife.js`),
+      sourcemap: true,
+      banner: config.banner,
+      name: config.name,
+      globals: {
+        'ol/tilegrid': 'ol.tilegrid',
+      },
+    },
   },
 ]

@@ -42,6 +42,7 @@ com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
 fabric.properties
+
 ### Linux template
 *~
 
@@ -56,7 +57,10 @@ fabric.properties
 
 # .nfs files are created when an open file is removed but is still being accessed
 .nfs*
+
 ### Node template
+package-lock.json
+
 # Logs
 logs
 *.log

@@ -12,24 +12,6 @@
       "plugins": [
         "istanbul"
       ]
-    },
-    "es": {
-      "plugins": [
-        "@babel/plugin-external-helpers"
-      ]
-    },
-    "umd": {
-      "plugins": [
-        "@babel/plugin-external-helpers",
-        [
-          "./modules/babel-plugin-merge-imports",
-          {
-            "pkg": "openlayers",
-            "pkgVar": "__ol__",
-            "regex": "^ol(?:\/(.*))?$"
-          }
-        ]
-      ]
     }
   }
 }

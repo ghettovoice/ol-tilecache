@@ -1,9 +1,10 @@
 {
   "name": "ol-tilecache",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "OpenLayers tile url function to load tile seeded with TileCache url scheme",
   "main": "dist/index.js",
   "browser": "dist/index.iife.js",
+  "type": "module",
   "scripts": {
     "rollup": "rollup -c build/rollup.config.js",
     "build": "cross-env NODE_ENV=production npm run clean && npm run rollup",

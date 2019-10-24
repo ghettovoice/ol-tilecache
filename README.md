@@ -56,7 +56,6 @@ Usage same as standard OpenLayers tile url functions.
 
 * `url : string` _URL template_
 * `tileGrid : ol.tilegrid.TileGrid` _Custom tile grid. Default is EPSG:3857 x/y/z grid_
-* `extent : ol.Extent` _Tile grid extent. Default is EPSG:3857 extent_
     
 **Returns**: `ol.TileUrlFunctionType`
 

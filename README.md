@@ -31,19 +31,12 @@ Or add from CDN:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.0/build/ol.js"></script>
-<script src="https://unpkg.com/ol-tilecache@latest/dist/bundle.min.js"></script>
+<script src="https://unpkg.com/ol-tilecache@latest/dist/index.iife.js"></script>
 <script>
   // plugin exports global variable TileCacheUrlFn
   // in addition it also exported to `ol.tileCacheUrlFn` field (for backward compatibility).
 </script>
 ```
-
-### Note
-**Plugin is available in 2 versions: as UMD module and as ES2015 module:**
-- **RECOMMENDED: ES2015 version (`dist/bundle.es.js`) should be used with [ol](https://www.npmjs.com/package/ol) package (you should
-  install it manually).**
-- **UMD version (`dist/bundle[.min].js`) should be used with UMD [ol](https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.0/build/ol.js) package.
-  You can install `ol` package as dev dependency to suppress NPM warning about required peer dependencies.**
 
 ## Usage
 

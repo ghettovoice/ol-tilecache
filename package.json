@@ -1,6 +1,6 @@
 {
   "name": "ol-tilecache",
-  "version": "5.0.0",
+  "version": "6.0.0",
   "description": "OpenLayers tile url function to load tile seeded with TileCache url scheme",
   "main": "dist/index.umd.js",
   "module": "dist/index.js",

@@ -26,8 +26,8 @@ module.exports = [
       banner: config.banner,
     }),
     output: {
-      format: 'iife',
-      file: path.join(__dirname, `../dist/index.iife.js`),
+      format: 'umd',
+      file: path.join(__dirname, `../dist/index.umd.js`),
       sourcemap: true,
       banner: config.banner,
       name: config.name,

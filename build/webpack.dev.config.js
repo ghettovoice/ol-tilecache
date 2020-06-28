@@ -15,6 +15,7 @@ const webpackConfig = merge(baseConfig, {
     hot: true,
     inline: true,
     compress: true,
+    open: true,
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

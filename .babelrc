@@ -7,6 +7,11 @@
       }
     ]
   ],
+  "plugins": [
+    "@babel/plugin-proposal-function-bind",
+    ["@babel/plugin-proposal-optional-chaining", { "loose": false }],
+    "@babel/plugin-transform-runtime"
+  ],
   "env": {
     "test": {
       "plugins": [

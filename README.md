@@ -31,7 +31,7 @@ Or add from CDN:
 
 ```html
 <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.0.0/build/ol.js"></script>
-<script src="https://unpkg.com/ol-tilecache@latest/dist/index.iife.js"></script>
+<script src="https://unpkg.com/ol-tilecache@latest/dist/ol-tilecache.umd.js"></script>
 <script>
   // plugin exports global variable TileCacheUrlFn
   // in addition it also exported to `ol.tileCacheUrlFn` field (for backward compatibility).
@@ -102,4 +102,4 @@ npm test
 
 ## License
 
-MIT (c) 2016-2019, Vladimir Vershinin
+MIT (c) 2016-2020, Vladimir Vershinin

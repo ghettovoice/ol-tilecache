@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ghettovoice/ol-tilecache.svg?branch=master)](https://travis-ci.org/ghettovoice/ol-tilecache)
+[![Build Status](https://travis-ci.com/ghettovoice/ol-tilecache.svg?branch=master)](https://travis-ci.com/ghettovoice/ol-tilecache)
 [![Coverage Status](https://coveralls.io/repos/github/ghettovoice/ol-tilecache/badge.svg?branch=master)](https://coveralls.io/github/ghettovoice/ol-tilecache?branch=master)
 [![GitHub tag](https://img.shields.io/github/tag/ghettovoice/ol-tilecache.svg)](https://github.com/ghettovoice/ol-tilecache/releases)
 [![view on npm](http://img.shields.io/npm/v/ol-tilecache.svg)](https://www.npmjs.org/package/ol-tilecache)
